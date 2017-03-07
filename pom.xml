@@ -16,5 +16,6 @@
     </parent>
     <modules>
         <module>resource-authentication-server</module>
+        <module>auth-server</module>
     </modules>
 </project>

@@ -1,4 +1,4 @@
-package com.biblio.security;
+package com.biblio.auth.server.security;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

@@ -1,4 +1,4 @@
-package com.biblio.security;
+package com.biblio.auth.server.security;
 
 public class CustomError {
 

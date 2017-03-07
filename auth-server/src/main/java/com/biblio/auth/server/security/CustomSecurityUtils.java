@@ -1,4 +1,4 @@
-package com.biblio.security;
+package com.biblio.auth.server.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import org.springframework.security.core.userdetails.User;
 
 /**
  * Utility class for Spring Security.
@@ -46,36 +45,7 @@ public final class CustomSecurityUtils {
         return userName;
     }
     
-    public static String getPositionTrackerCurrentLogin() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        User springSecurityUser = null;
-        String userName = null;
-        springSecurityUser = (User) authentication.getPrincipal();
-        userName = springSecurityUser.getUsername();
-        return userName;
-    }
-    
-    public static String getMobileMarchandCurrentLogin() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        User springSecurityUser = null;
-        String userName = null;
-        springSecurityUser = (User) authentication.getPrincipal();
-        userName = springSecurityUser.getUsername();
-        return userName;
-    }
-    
-    public static String getAgentTransfertCurrentLogin() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
-        User springSecurityUser = null;
-        String userName = null;
-        springSecurityUser = (User) authentication.getPrincipal();
-        userName = springSecurityUser.getUsername();
-        return userName;
-    }
-    
+   
 
     public static void sendError(HttpServletResponse response, Exception exception, int status, String message) throws IOException {
         System.out.println("********************** ERROR");

@@ -3,16 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.biblio;
+package com.biblio.auth.server;
 
-import java.security.Principal;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -21,21 +16,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * @author kouwonou
  */
 @SpringBootApplication
-@RestController
-public class BiblithequeMain  {
+@EnableResourceServer
+
+public class MainAuthServer extends WebMvcConfigurerAdapter{
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        SpringApplication.run(BiblithequeMain.class, args);
+        SpringApplication.run(MainAuthServer.class, args);
     }
-
-   
-    @RequestMapping(value = "hello")
-    public String hello(){
-        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHh");
-        return "Bonjour";
+     @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/oauth/confirm_access").setViewName("authorize");
     }
 }

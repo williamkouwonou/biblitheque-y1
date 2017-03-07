@@ -1,9 +1,7 @@
-package com.biblio.security;
+package com.biblio.auth.server.security;
 
 
-import com.biblio.entity.User;
-import com.biblio.service.dto.UserDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;

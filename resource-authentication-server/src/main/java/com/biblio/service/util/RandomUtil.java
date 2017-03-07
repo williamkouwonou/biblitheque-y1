@@ -20,6 +20,15 @@ public final class RandomUtil {
     public static String generatePassword() {
         return RandomStringUtils.randomAlphanumeric(DEF_COUNT);
     }
+    /**
+     * Generates a password.
+     *
+     * @param length
+     * @return the generated password
+     */
+    public static String generateAlphaNumerique(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);
+    }
 
     /**
      * Generates an activation key.

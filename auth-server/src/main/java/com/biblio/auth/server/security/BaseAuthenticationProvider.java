@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.biblio.security;
+package com.biblio.auth.server.security;
 
-import com.biblio.entity.Role;
-import com.biblio.entity.User;
-import com.biblio.repository.UserRepository;
+
+import com.biblio.auth.server.User;
+import com.biblio.auth.server.reposotory.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import javax.inject.Inject;
+
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,13 +34,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class BaseAuthenticationProvider implements AuthenticationProvider {
 
-    @Inject
+    @Autowired
     private UserRepository userRepository;
 
-    @Inject
+    @Autowired
     private HttpServletRequest request;
 
-    @Inject
+   @Autowired
     private PasswordEncoder encoder;
 
     @Override
