@@ -1,2 +1,5 @@
 /auth-server/target/
 /resource-authentication-server/target/
+/resource-server/target/
+/biblio-resource-server/target/
+/biblio-auth-server/target/

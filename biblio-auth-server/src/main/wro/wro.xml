@@ -4,4 +4,7 @@
       <css>file:@project.basedir@/src/main/wro/main.less</css>
       <js>webjar:jquery/@jquery.version@/jquery.min.js</js>
    </group>
+   
+  
+  
 </groups>

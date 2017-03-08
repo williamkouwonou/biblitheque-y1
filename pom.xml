@@ -15,7 +15,7 @@
         <relativePath/> 
     </parent>
     <modules>
-        <module>resource-authentication-server</module>
-        <module>auth-server</module>
+        <module>biblio-auth-server</module>
+        <module>biblio-resource-server</module>
     </modules>
 </project>

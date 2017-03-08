@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="../css/wro.css"/>
+<link href="..css/angular-bootstrap.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
