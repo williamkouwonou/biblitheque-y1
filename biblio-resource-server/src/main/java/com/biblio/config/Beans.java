@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.biblio.config.util;
+package com.biblio.config;
 
 import com.biblio.entity.Role;
 import com.biblio.entity.User;
