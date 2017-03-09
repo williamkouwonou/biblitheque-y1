@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @Component
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler{

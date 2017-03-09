@@ -30,7 +30,7 @@ import org.hibernate.validator.constraints.Email;
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @Entity
 public class User implements Serializable {

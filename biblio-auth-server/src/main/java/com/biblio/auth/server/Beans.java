@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @Configuration
 public class Beans {

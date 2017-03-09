@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @SpringBootApplication
 @EnableResourceServer
