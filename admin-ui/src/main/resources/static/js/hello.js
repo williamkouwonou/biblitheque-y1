@@ -20,7 +20,10 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
 
             $http.get('user').then(function (response) {
                 if (response.data.name) {
+                    
+                    console.info("nn "+JSON.stringify(response.data));
                     $rootScope.authenticated = true;
+                    self.nom=response.data.name;
                 } else {
                     $rootScope.authenticated = false;
                 }
@@ -33,6 +36,7 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
             self.logout = function () {
                 $http.post('logout', {}).finally(function () {
                     $rootScope.authenticated = false;
+                    self.nom='';
                     $location.path("/");
                 });
             };
