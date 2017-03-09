@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @SpringBootApplication
 @RestController

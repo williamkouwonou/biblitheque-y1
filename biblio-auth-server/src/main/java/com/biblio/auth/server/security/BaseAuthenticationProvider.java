@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author sewa
+ * @author alindaessi
  */
 @Component
 public class BaseAuthenticationProvider implements AuthenticationProvider {

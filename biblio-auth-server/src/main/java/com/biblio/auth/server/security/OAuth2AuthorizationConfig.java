@@ -21,7 +21,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @Configuration
 @EnableAuthorizationServer

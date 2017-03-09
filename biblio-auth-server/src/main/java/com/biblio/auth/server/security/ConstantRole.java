@@ -7,7 +7,7 @@ package com.biblio.auth.server.security;
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 public final  class ConstantRole {
     public final static String  ADMIN_ROLE ="ADMIN";

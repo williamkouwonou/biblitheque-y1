@@ -17,7 +17,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  *
- * @author kouwonou
+ * @author alindaessi
  */
 @Configuration
 @Order(-20)
