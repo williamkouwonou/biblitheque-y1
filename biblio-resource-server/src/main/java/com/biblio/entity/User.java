@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -231,6 +232,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
     }
+    private static final Logger LOG = Logger.getLogger(User.class.getName());
 
     
 }

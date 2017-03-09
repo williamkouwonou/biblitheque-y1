@@ -6,6 +6,8 @@
 package com.biblio.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +29,14 @@ public class Categorie implements Serializable{
     private String désignation;
     @Column(length = 50000 )
     private String description;
+
+    public Categorie() {
+    }
+
+    public Categorie(String désignation, String description) {
+        this.désignation = désignation;
+        this.description = description;
+    }
 
     public Long getId() {
         return id;
@@ -51,6 +61,32 @@ public class Categorie implements Serializable{
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Categorie other = (Categorie) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    private static final Logger LOG = Logger.getLogger(Categorie.class.getName());
     
     
 }
