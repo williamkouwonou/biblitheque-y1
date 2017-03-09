@@ -5,16 +5,14 @@
  */
 package com.biblio;
 
+import com.biblio.service.util.RandomUtil;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  *
@@ -22,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @SpringBootApplication
 @RestController
-public class BiblithequeMain  {
+public class BiblithequeMain {
 
     /**
      * @param args the command line arguments
@@ -32,10 +30,17 @@ public class BiblithequeMain  {
         SpringApplication.run(BiblithequeMain.class, args);
     }
 
-   
-    @RequestMapping(value = "hello")
-    public String hello(){
-        System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHh");
-        return "Bonjour";
+    @RequestMapping(value = "/hello")
+    public Object hello() {
+        Map<String, Object> modele = new HashMap<>();
+        modele.put("content", "Bonjour , Tu viens de te connecter au serveur resource");
+       modele.put("id", RandomUtil.generateActivationKey());
+        return modele;
     }
+    @RequestMapping(value = "/user")
+    public Object hello(Principal user) {
+        System.out.println("HHH");
+        return user;
+    }
+    
 }

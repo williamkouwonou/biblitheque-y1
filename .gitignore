@@ -3,3 +3,5 @@
 /resource-server/target/
 /biblio-resource-server/target/
 /biblio-auth-server/target/
+/ui/target/
+/admin-ui/target/
