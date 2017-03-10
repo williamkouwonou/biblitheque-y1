@@ -27,7 +27,7 @@ public class Categorie implements Serializable{
     
     @Column(nullable = false )
     private String désignation;
-    @Column(length = 50000 )
+    @Column(length = 5000 )
     private String description;
 
     public Categorie() {

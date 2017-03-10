@@ -7,6 +7,7 @@ package com.biblio.auth.server;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 @Entity
 public class Role implements Serializable {
     @Id
+    @Column(length = 20)
    private String name; 
 
     public Role(String name) {

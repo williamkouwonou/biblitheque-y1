@@ -205,8 +205,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 71 * hash + Objects.hashCode(this.login);
+        hash = 71 * hash + Objects.hashCode(this.roles);
         return hash;
     }
 
@@ -225,8 +226,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
+        if (!Objects.equals(this.roles, other.roles)) {
+            return false;
+        }
         return true;
     }
+
+  
 
     @Override
     public String toString() {
