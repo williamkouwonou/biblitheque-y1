@@ -24,10 +24,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/**
- *
- * @author kouwonou
- */
+
 @Configuration
 public class Beans {
 
