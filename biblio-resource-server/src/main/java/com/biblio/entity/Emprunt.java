@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 
 @Entity
@@ -33,6 +34,10 @@ public class Emprunt implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateDeRendu;
 
+    /**
+     * oui si le livre est retourné , NON si non.
+     */
+    private Boolean etat= Boolean.FALSE;
     public Emprunt() {
     }
 
@@ -121,10 +126,22 @@ public class Emprunt implements Serializable {
         return true;
     }
 
+    public Boolean getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Boolean etat) {
+        this.etat = etat;
+    }
+
     @Override
     public String toString() {
         return "Emprunt{" + "id=" + id + ", reference=" + reference + ", dateEmprunt=" + dateEmprunt + ", membre=" + membre + ", livre=" + livre + ", dateDeRendu=" + dateDeRendu + '}';
     }
     private static final Logger LOG = Logger.getLogger(Emprunt.class.getName());
-    
+   
+    @PrePersist
+    public void init(){
+        etat=false;
+    }
 }

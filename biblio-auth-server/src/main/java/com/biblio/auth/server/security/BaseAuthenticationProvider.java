@@ -69,7 +69,7 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
             }       
         
 
-        return new UsernamePasswordAuthenticationToken(user, password, toGrantedAuthorities(user));
+        return new UsernamePasswordAuthenticationToken(user.getLogin(), password, toGrantedAuthorities(user));
     }
 
     private static Collection<GrantedAuthority> toGrantedAuthorities(final User user) {

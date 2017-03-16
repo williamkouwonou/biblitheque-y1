@@ -1,29 +1,38 @@
-angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvider) {
+angular.module('app', ['ngRoute','ngFlash']).config(function ($routeProvider, $httpProvider) {
 
-    $routeProvider.when('/', {
-        templateUrl: 'home.html',
-        controller: 'home',
-        controllerAs: 'controller'
-    }).otherwise('/');
+  
+    $routeProvider
+            .when('/', {
+                templateUrl: 'home.html',
+                controller: 'home',
+                controllerAs: 'vm'
+            })
 
-    $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+            .when('/register', {
+                templateUrl: 'app/register-user/register.html',
+                controller: 'RegisterUserController',
+                controllerAs: 'vm'
+            }).otherwise('/');
+
+   $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $httpProvider.defaults.headers.common['Accept'] = 'application/json';
 
-}).controller('navigation',
+})
+        .controller('navigation',
         function ($rootScope, $http, $location, $route) {
 
             var self = this;
-
+      
             self.tab = function (route) {
                 return $route.current && route === $route.current.controller;
             };
 
             $http.get('user').then(function (response) {
+               
                 if (response.data.name) {
-                    
-                    console.info("nn "+JSON.stringify(response.data));
+
                     $rootScope.authenticated = true;
-                    self.nom=response.data.name;
+                    self.nom = response.data.name;
                 } else {
                     $rootScope.authenticated = false;
                 }
@@ -36,14 +45,14 @@ angular.module('hello', ['ngRoute']).config(function ($routeProvider, $httpProvi
             self.logout = function () {
                 $http.post('logout', {}).finally(function () {
                     $rootScope.authenticated = false;
-                    self.nom='';
+                    self.nom = '';
                     $location.path("/");
                 });
             };
 
         }).controller('home', function ($http) {
     var self = this;
-    $http.get('resource/').then(function (response) {
+    $http.get('resources/').then(function (response) {
         console.info(JSON.stringify(response.data));
         self.greeting = response.data;
     });

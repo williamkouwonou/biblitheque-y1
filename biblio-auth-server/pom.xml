@@ -50,11 +50,7 @@
 
         
         
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional>
-        </dependency>
+        
          <!--Postgres  jdbc-->
         <dependency>
             <groupId>mysql</groupId>
@@ -65,7 +61,10 @@
             <artifactId>spring-jdbc</artifactId>
         </dependency>
 
-		
+	<dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+        </dependency>	
       
         
      

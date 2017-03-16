@@ -52,28 +52,37 @@ public class UserResource {
 
     public Object createUser(@RequestBody @Valid ManagedUserVM managedUserVM, BindingResult bindingResult) {
         Map<String, Object> modele = new HashMap<>();
+        
         if (bindingResult.hasErrors()) {
 
             modele.put(Constants.ERROR, true);
             modele.put(Constants.MESSAGE, "Enregistrement échoué");
             bindingResult.getFieldErrors().stream().forEach((f) -> {
+                System.out.println("Field "+f.getField());
+                System.out.println("error"+f.getDefaultMessage());
                 modele.put(f.getField(), f.getDefaultMessage());
             });
 
             return modele;
         }
+        System.out.println("TTTTTTTTTTTTT1");
         if (userRepository.findOneByLogin(managedUserVM.getLogin()).isPresent()) {
+             System.out.println("TTTTTTTTTTTTT2");
             modele.put(Constants.ERROR, "true");
             modele.put(Constants.MESSAGE, "Enregistrement échoué");
             modele.put("login", "Ce nom d'utilisateur existe deja");
             return modele;
         }
+         System.out.println("TTTTTTTTTTTTT3");
         if (userRepository.findOneByEmail(managedUserVM.getEmail()).isPresent()) {
             modele.put(Constants.ERROR, "true");
             modele.put(Constants.MESSAGE, "Enregistrement échoué");
             modele.put("email", "Ce email est deja utilisé");
+             System.out.println("TTTTTTTTTTTTT4");
             return modele;
         }
+         System.out.println("TTTTTTTTTTTTT");
+         managedUserVM.setPassword("123456");
         User u = userService.createUser(managedUserVM);
         modele.put(Constants.MESSAGE, "Enregistrement réussi");
         return modele;

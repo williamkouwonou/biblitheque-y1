@@ -4,7 +4,6 @@ package com.biblio.web.rest.vm;
 import com.biblio.service.dto.UserDTO;
 import java.util.Date;
 import java.util.Set;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -18,7 +17,7 @@ public class ManagedUserVM extends UserDTO {
     private Long id;
 
 
-    @NotNull
+   
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
     private String password;
 

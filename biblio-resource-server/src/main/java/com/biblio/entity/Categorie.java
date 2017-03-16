@@ -26,17 +26,19 @@ public class Categorie implements Serializable{
     private Long id;
     
     @Column(nullable = false )
-    private String désignation;
+    private String designation;
     @Column(length = 5000 )
     private String description;
+
+    public Categorie(String designation, String description) {
+        this.designation = designation;
+        this.description = description;
+    }
 
     public Categorie() {
     }
 
-    public Categorie(String désignation, String description) {
-        this.désignation = désignation;
-        this.description = description;
-    }
+   
 
     public Long getId() {
         return id;
@@ -46,13 +48,15 @@ public class Categorie implements Serializable{
         this.id = id;
     }
 
-    public String getDésignation() {
-        return désignation;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setDésignation(String désignation) {
-        this.désignation = désignation;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
+
+   
 
     public String getDescription() {
         return description;

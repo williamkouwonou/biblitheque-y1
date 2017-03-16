@@ -226,10 +226,10 @@ public class User implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
+//    }
 
     
 }

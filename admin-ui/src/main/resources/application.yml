@@ -10,8 +10,8 @@ security:
     password: none
   oauth2:
     client:
-      accessTokenUri: http://localhost:9072/authserver/oauth/token
-      userAuthorizationUri: http://localhost:9072/authserver/oauth/authorize
+      accessTokenUri: http://localhost:9070/authserver/oauth/token
+      userAuthorizationUri: http://localhost:9070/authserver/oauth/authorize
       clientId: acme
       clientSecret: acmesecret
     resource:
@@ -23,9 +23,12 @@ security:
 
 zuul:
   routes:
-    resource:
-      path: /resource/**
+    resources:
+      path: /resources/**
       url: http://localhost:9071/biblio/hello
+    userregiser :
+      path: /resource/user/create/**
+      url: http://localhost:9071/biblio/api/register
     user:
       path: /user/**
       url: http://localhost:9071/biblio/user

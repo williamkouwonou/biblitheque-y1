@@ -1,7 +1,7 @@
 <h1>Greeting</h1>
 <div ng-show="authenticated">
-	<p>ID : {{controller.greeting.id}}</p>
-	<p>Compliment:  {{controller.nom}} ,{{controller.greeting.content}}</p>
+	<p>ID : {{vm.greeting.id}}</p>
+	<p>Compliment:  {{vm.nom}} ,{{vm.greeting.content}}</p>
 </div>
 <div  ng-show="!authenticated">
 	<p>Connectes toi pour voir ton mot de bienvenu....</p>

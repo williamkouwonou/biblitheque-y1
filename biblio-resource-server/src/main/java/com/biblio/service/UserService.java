@@ -127,7 +127,8 @@ public class UserService {
         user.setCreatedBy(SecurityUtils.getCurrentUserLogin());
 
 //        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
-        String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
+        System.out.println("HHHH     NNN");
+String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(ZonedDateTime.now());
@@ -136,6 +137,7 @@ public class UserService {
        
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
+        System.out.println("GGGGGGLLLLLLLLLLLLLLLLL");
         return user;
     }
 

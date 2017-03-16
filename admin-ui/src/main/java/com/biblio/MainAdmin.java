@@ -31,7 +31,7 @@ public class MainAdmin extends WebSecurityConfigurerAdapter {
 		http
 			.logout().and()
 			.authorizeRequests()
-				.antMatchers("/index.html", "/home.html", "/", "/login").permitAll()
+				.antMatchers("/index.html", "/home.html", "/", "/login","/app/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.csrf()
