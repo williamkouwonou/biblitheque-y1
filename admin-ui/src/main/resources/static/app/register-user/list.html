@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Dashboard <small>Statistics Overview</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Dashboard
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
+        </div>
+    </div>
+</div>
+
+<form>
+
+    <input type="text" ng-model="vm.mot" >
+    <button ng-click="vm.chercher()" > Chercher</button>
+</form>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-boa">
+            <div class="box-header">
+                <h3 class="box-title">Liste des membres</h3>
+
+
+            </div>
+            <!-- Default panel contents -->
+            <div class="table-responsive">
+                <table id="agenceListe"   class="table table-hover  table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Date de Naissance</th>
+                            <th>Email</th>
+                            <th>Tel</th>
+                            <th>Date de creation</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in vm.users">
+                            <td><span ng-bind="u.nom"></span></td>
+                            <td><span ng-bind="u.prenom"></span></td>
+                            <td><span ng-bind="u.dateNaissance"></span></td>
+                            <td><span ng-bind="u.email"></span></td>
+                            <td><span ng-bind="u.tel"></span></td>
+                            <td><span ng-bind="u.createdDate"></span></td>
+                            <td>
+                                <div class="btn-toolbar">
+                                    <button type="button" ng-click="vm.edit3(u.id)" class="btn  btn-primary" title="modifier"><i class="fa fa-edit"></i></button>
+                                    <button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="container spacer">
+                <ul class="nav nav-pills">
+                    <li class="clickable" ng-repeat="p in vm.pages track by $index">
+                        <a ng-click="vm.goToPage($index)" > {{$index}}</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

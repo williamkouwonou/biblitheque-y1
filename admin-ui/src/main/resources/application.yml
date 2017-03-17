@@ -28,7 +28,10 @@ zuul:
       url: http://localhost:9071/biblio/hello
     userregiser :
       path: /resource/user/create/**
-      url: http://localhost:9071/biblio/api/register
+      url: http://localhost:9071/biblio/api/user/register
+    userlist :
+      path: /resource/user/listpage/**
+      url: http://localhost:9071/biblio/api/user/listpage
     user:
       path: /user/**
       url: http://localhost:9071/biblio/user

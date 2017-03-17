@@ -65,19 +65,19 @@ public class MailService {
             javaMailSender.setHost(env.getProperty("mail.host"));
             javaMailSender.setProtocol(env.getProperty("mail.protocol"));
             javaMailSender.setUsername(env.getProperty("mail.from"));
-
+            System.out.println("45");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.auth", "true");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.starttls.enable", "true");
 //            javaMailSender.getJavaMailProperties().setProperty("mail.smtp.quitwait", "false");
 //            javaMailSender.getJavaMailProperties().setProperty("mail.smtp.socketFactory.fallback", "true");
             javaMailSender.getJavaMailProperties().setProperty("mail.debug", "true");
-
+System.out.println("4588");
             //javaMailSender.getJavaMailProperties().setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             javaMailSender.send(mimeMessage);
-            System.out.println("2222222222222222222222222");
+          
             log.debug("Sent e-mail to User '{}'", to);
         } catch (Exception e) {
-            System.out.println("3333333333333333333333333333");
+           
             log.warn("E-mail could not be sent to user '{}', exception is: {}", to, e.getMessage());
         }
     }
@@ -117,4 +117,5 @@ public class MailService {
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
     }
+    
 }

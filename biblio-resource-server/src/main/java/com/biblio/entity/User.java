@@ -58,7 +58,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(length = 50, unique = true, nullable = false)
     private String login;
     
-    
+    @JsonIgnore
     private String password;
 
     @NotNull
@@ -80,6 +80,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
+    
+    private Boolean membre;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_role",
@@ -239,6 +242,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
     }
     private static final Logger LOG = Logger.getLogger(User.class.getName());
+
+    public Boolean getMembre() {
+        return membre;
+    }
+
+    public void setMembre(Boolean membre) {
+        this.membre = membre;
+    }
 
     
 }

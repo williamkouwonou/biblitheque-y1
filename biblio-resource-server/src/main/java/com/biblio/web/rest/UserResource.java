@@ -9,18 +9,24 @@ import com.biblio.config.util.Constants;
 import com.biblio.entity.User;
 import com.biblio.repository.UserRepository;
 import com.biblio.security.SecurityUtils;
+import com.biblio.security.util.ConstantRole;
 import com.biblio.service.MailService;
 import com.biblio.service.UserService;
 import com.biblio.service.dto.UserDTO;
 import com.biblio.web.rest.vm.KeyAndPasswordVM;
 import com.biblio.web.rest.vm.ManagedUserVM;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +35,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -36,7 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author kouwonou
  */
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/user")
 public class UserResource {
 
     @Inject
@@ -50,41 +57,44 @@ public class UserResource {
             method = RequestMethod.POST,
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
 
-    public Object createUser(@RequestBody @Valid ManagedUserVM managedUserVM, BindingResult bindingResult) {
+    public Object createUser(@RequestBody @Valid ManagedUserVM managedUserVM, BindingResult bindingResult) throws MessagingException {
         Map<String, Object> modele = new HashMap<>();
-        
+
         if (bindingResult.hasErrors()) {
 
             modele.put(Constants.ERROR, true);
             modele.put(Constants.MESSAGE, "Enregistrement échoué");
             bindingResult.getFieldErrors().stream().forEach((f) -> {
-                System.out.println("Field "+f.getField());
-                System.out.println("error"+f.getDefaultMessage());
+                System.out.println("Field " + f.getField());
+                System.out.println("error" + f.getDefaultMessage());
                 modele.put(f.getField(), f.getDefaultMessage());
             });
 
             return modele;
         }
-        System.out.println("TTTTTTTTTTTTT1");
+
         if (userRepository.findOneByLogin(managedUserVM.getLogin()).isPresent()) {
-             System.out.println("TTTTTTTTTTTTT2");
+
             modele.put(Constants.ERROR, "true");
             modele.put(Constants.MESSAGE, "Enregistrement échoué");
             modele.put("login", "Ce nom d'utilisateur existe deja");
             return modele;
         }
-         System.out.println("TTTTTTTTTTTTT3");
+
         if (userRepository.findOneByEmail(managedUserVM.getEmail()).isPresent()) {
             modele.put(Constants.ERROR, "true");
             modele.put(Constants.MESSAGE, "Enregistrement échoué");
             modele.put("email", "Ce email est deja utilisé");
-             System.out.println("TTTTTTTTTTTTT4");
+
             return modele;
         }
-         System.out.println("TTTTTTTTTTTTT");
-         managedUserVM.setPassword("123456");
+
+        managedUserVM.setPassword("123456");
+        managedUserVM.getRoles().add(ConstantRole.USER_ROLE);
         User u = userService.createUser(managedUserVM);
         modele.put(Constants.MESSAGE, "Enregistrement réussi");
+        
+        mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
         return modele;
     }
 
@@ -99,7 +109,7 @@ public class UserResource {
     @RequestMapping(value = "/account",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object saveAccount(@Valid @RequestBody UserDTO userDTO,BindingResult bindingResult) {
+    public Object saveAccount(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
         Map<String, Object> modele = new HashMap<>();
         Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
         if (bindingResult.hasErrors()) {
@@ -112,8 +122,7 @@ public class UserResource {
 
             return modele;
         }
-        
-        
+
         if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
             modele.put(Constants.ERROR, "true");
             modele.put(Constants.MESSAGE, "Email existe");
@@ -133,7 +142,7 @@ public class UserResource {
     }
 
     /**
-     * POST /account : update  user information by his id.
+     * POST /account : update user information by his id.
      *
      * @param userDTO the user information
      * @param id id of account to update
@@ -143,7 +152,7 @@ public class UserResource {
     @RequestMapping(value = "/account/{id}",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object saveAccount(@Valid @RequestBody UserDTO userDTO, @PathVariable("id") Long id,BindingResult bindingResult) {
+    public Object saveAccount(@Valid @RequestBody UserDTO userDTO, @PathVariable("id") Long id, BindingResult bindingResult) {
         Map<String, Object> modele = new HashMap<>();
         if (bindingResult.hasErrors()) {
 
@@ -155,7 +164,7 @@ public class UserResource {
 
             return modele;
         }
-        
+
         Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
         if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userDTO.getLogin()))) {
             modele.put(Constants.ERROR, "true");
@@ -227,7 +236,7 @@ public class UserResource {
                             + ":"
                             + request.getServerPort()
                             + request.getContextPath();
-                    mailService.sendPasswordResetMail(user, baseUrl);
+                   // mailService.sendPasswordResetMail(user, baseUrl);
                     return new ResponseEntity<>("e-mail was sent", HttpStatus.OK);
                 }).orElse(new ResponseEntity<>("e-mail address not registered", HttpStatus.BAD_REQUEST));
     }
@@ -252,5 +261,46 @@ public class UserResource {
         return userService.completePasswordReset(keyAndPassword.getNewPassword(), keyAndPassword.getKey())
                 .map(user -> new ResponseEntity<String>(HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @RequestMapping(value = "/list",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object listeMembre(@RequestParam("mot") String mot) {
+        Map<String, Object> modele = new HashMap<>();
+        mot = mot == null ? "%%" : "%" + mot + "%";
+
+        List<User> lu = userRepository.findByMoCle(mot);
+        return lu;
+    }
+
+    @RequestMapping(value = "/listpage",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object listeMembre(@RequestParam("mot") String mot, @RequestParam("page") int page, @RequestParam("size") int size) {
+        mot = mot == null ? "%%" : "%" + mot + "%";
+        Page<User> lu = userRepository.findByMoCle(mot, new PageRequest(page, size));
+        return lu;
+    }
+
+    @RequestMapping(value = "/delete",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object activation(@RequestParam("userid") Long id,@RequestParam("activedtype")Boolean activedType) {
+        User u = userRepository.findOne(id);
+        
+        Map<String, Object> modele = new HashMap<>();
+       
+           
+        if (u != null) {
+            u.setActivated(false);
+            u.setLastModifiedDate(ZonedDateTime.now());
+            userRepository.saveAndFlush(u);
+            modele.put(Constants.MESSAGE, "Opération Réussie");
+            return modele;
+        }
+         modele.put(Constants.ERROR, true);
+            modele.put(Constants.MESSAGE, "Opération échouée");
+            return modele;
     }
 }

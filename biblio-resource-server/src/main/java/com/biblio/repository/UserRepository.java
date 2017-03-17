@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.repository.query.Param;
 
 /**
  * Spring Data JPA repository for the User entity.
@@ -34,6 +35,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "select distinct user from User user join fetch user.roles",
         countQuery = "select count(user) from User user")
     Page<User> findAllWithAuthorities(Pageable pageable);
+    
+    @Query("SELECT u FROM User u WHERE u.nom LIKE :mot OR u.prenom like :mot OR u.tel LIKE :mot OR u.email LIKE :mot")
+    Page<User> findByMoCle(@Param("mot")String mot,Pageable pageable);
+    @Query("SELECT u FROM User u WHERE u.nom LIKE :mot OR u.prenom like :mot OR u.tel LIKE :mot OR u.email LIKE :mot")
+    List<User> findByMoCle(@Param("mot")String mot);
 
     @Override
     void delete(User t);

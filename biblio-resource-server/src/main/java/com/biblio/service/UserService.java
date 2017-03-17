@@ -1,6 +1,5 @@
 package com.biblio.service;
 
-
 import com.biblio.entity.Role;
 import com.biblio.entity.User;
 import com.biblio.repository.RoleRepository;
@@ -34,8 +33,6 @@ public class UserService {
 
     @Inject
     private UserRepository userRepository;
-
-   
 
     @Inject
     private RoleRepository roleRepository;
@@ -94,7 +91,7 @@ public class UserService {
         newUser.setNom(nom);
         newUser.setPrenom(prenom);
         newUser.setEmail(email);
-        
+
         newUser.setTel(tel);
         // new user is not active
         newUser.setActivated(false);
@@ -116,7 +113,7 @@ public class UserService {
         user.setEmail(managedUserVM.getEmail());
         user.setTel(managedUserVM.getTel());
         user.setDateNaissance(managedUserVM.getDateNaissance());
-        if (managedUserVM.getRoles()!= null) {
+        if (managedUserVM.getRoles() != null) {
             Set<Role> roles = new HashSet<>();
             managedUserVM.getRoles().stream().forEach(
                     role -> roles.add(roleRepository.findOne(role))
@@ -127,22 +124,19 @@ public class UserService {
         user.setCreatedBy(SecurityUtils.getCurrentUserLogin());
 
 //        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
-        System.out.println("HHHH     NNN");
-String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
+        String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(ZonedDateTime.now());
         user.setActivated(true);
 
-       
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
-        System.out.println("GGGGGGLLLLLLLLLLLLLLLLL");
         return user;
     }
 
-    public void updateUser(String nom, String prenom,Date dateNaissance, String email,  String tel) {
-       
+    public void updateUser(String nom, String prenom, Date dateNaissance, String email, String tel) {
+
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(u -> {
             u.setNom(nom);
             u.setPrenom(prenom);
@@ -154,9 +148,9 @@ String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
         });
     }
 
-    public void updateUser(Long id, String login, String nom, String prenom,Date dateNaissance, String email,
-            boolean activated,  String tel, Set<String> roles) {
-       
+    public void updateUser(Long id, String login, String nom, String prenom, Date dateNaissance, String email,
+            boolean activated, String tel, Set<String> roles) {
+
         userRepository
                 .findOneById(id)
                 .ifPresent(u -> {
@@ -167,12 +161,11 @@ String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
                     u.setActivated(activated);
                     u.setDateNaissance(dateNaissance);
                     u.setTel(tel);
- 
-                   
+
                     Set<Role> managedRoles = u.getRoles();
                     managedRoles.clear();
                     roles.stream().forEach(
-                            role-> managedRoles.add(roleRepository.findOne(role))
+                            role -> managedRoles.add(roleRepository.findOne(role))
                     );
                     log.debug("Changed Information for User: {}", u);
                 });
@@ -217,7 +210,6 @@ String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
         return user;
     }
 
-    
     /**
      * Not activated users should be automatically deleted after 3 days.
      * <p>

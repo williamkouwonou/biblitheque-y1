@@ -4,6 +4,7 @@ import com.biblio.config.util.Constants;
 import com.biblio.web.rest.util.Utils;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashSet;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.*;
@@ -26,7 +27,7 @@ public class UserDTO {
     @Size(min = 3, max = 50)
     @NotNull
     private String prenom;
-    
+
     @NotNull
     private Date dateNaissance;
 
@@ -87,6 +88,7 @@ public class UserDTO {
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
+
     public void setDateNaissance(String dateNaissance) throws ParseException {
         this.dateNaissance = Utils.convertToDate(dateNaissance);
     }
@@ -116,6 +118,9 @@ public class UserDTO {
     }
 
     public Set<String> getRoles() {
+        if (roles == null) {
+            roles= new HashSet<>();
+        }
         return roles;
     }
 
