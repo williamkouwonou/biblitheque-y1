@@ -35,6 +35,9 @@ zuul:
     user:
       path: /user/**
       url: http://localhost:9071/biblio/user
+    userinfo:
+      path: /userinfo/**
+      url: http://localhost:9071/biblio/user/info
 
 logging:
   level:

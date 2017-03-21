@@ -12,16 +12,16 @@
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 <div  class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
-        <li ng-class="{active:nav.tab('home')}"><a href="#/"><i class="fa fa-fw fa-home"></i>home</a></li>
+        <li ng-show="authenticated" ng-class="{active:nav.tab('home')}"><a href="#/"><i class="fa fa-fw fa-home"></i>home</a></li>
 
-        <li ng-show="!authenticated" ng-class="{active:nav.tab('navigation')}"><a href="login">login</a></li>
+        <!--li ng-show="!authenticated" ng-class="{active:nav.tab('navigation')}"><a href="login">login</a></li-->
         <li ng-show="authenticated" ng-class="{active:nav.tab('register')}"><a href="#/register"><i class="fa fa-fw fa-user"></i>Register</a></li>
         <li ng-show="authenticated" ng-class="{active:nav.tab('list')}"><a href="#/list"><i class="fa fa-fw fa-list"></i>List</a></li>
        
 
 
 
-        <li>
+        <!--li>
             <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
         </li>
         <li>
@@ -52,7 +52,7 @@
         </li>
         <li>
             <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-        </li>
+        </li-->
     </ul>
 </div>
 <!-- /.navbar-collapse -->

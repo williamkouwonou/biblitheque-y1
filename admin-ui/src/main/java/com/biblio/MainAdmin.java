@@ -27,7 +27,6 @@ public class MainAdmin extends WebSecurityConfigurerAdapter {
     }
     @Override
 	public void configure(HttpSecurity http) throws Exception {
-		// @formatter:off
 		http
 			.logout().and()
 			.authorizeRequests()
@@ -37,6 +36,5 @@ public class MainAdmin extends WebSecurityConfigurerAdapter {
 				.and()
 			.csrf()
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-			// @formatter:on
 	}
 }

@@ -94,7 +94,7 @@ public class UserResource {
         User u = userService.createUser(managedUserVM);
         modele.put(Constants.MESSAGE, "Enregistrement réussi");
         
-        mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
+        //mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
         return modele;
     }
 

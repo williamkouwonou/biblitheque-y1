@@ -45,6 +45,14 @@ angular.module('app', ['ngRoute', 'ngFlash']).config(function ($routeProvider, $
                     }, function () {
                         $rootScope.authenticated = false;
                     });
+                    $http.get('userinfo').then(function (response) {
+
+                        if (response.data.name) {
+
+                            $rootScope.name = response.data.name;
+                           
+                        } 
+                    });
 
                     self.credentials = {};
 

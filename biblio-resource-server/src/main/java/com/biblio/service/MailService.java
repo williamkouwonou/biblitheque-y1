@@ -12,7 +12,6 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import java.util.Locale;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
@@ -68,16 +67,13 @@ public class MailService {
             System.out.println("45");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.auth", "true");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.starttls.enable", "true");
-//            javaMailSender.getJavaMailProperties().setProperty("mail.smtp.quitwait", "false");
-//            javaMailSender.getJavaMailProperties().setProperty("mail.smtp.socketFactory.fallback", "true");
-            javaMailSender.getJavaMailProperties().setProperty("mail.debug", "true");
-System.out.println("4588");
-            //javaMailSender.getJavaMailProperties().setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+           javaMailSender.getJavaMailProperties().setProperty("mail.debug", "true");
+           
             javaMailSender.send(mimeMessage);
-          
+
             log.debug("Sent e-mail to User '{}'", to);
         } catch (Exception e) {
-           
+
             log.warn("E-mail could not be sent to user '{}', exception is: {}", to, e.getMessage());
         }
     }
@@ -117,5 +113,5 @@ System.out.println("4588");
         String subject = messageSource.getMessage("email.reset.title", null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
     }
-    
+
 }
