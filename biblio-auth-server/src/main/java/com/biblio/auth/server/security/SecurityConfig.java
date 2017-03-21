@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
  *
@@ -22,7 +23,8 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 @Configuration
 @Order(-20)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+    @Autowired
+  private  SimpleCorsFilter simpleCorsFilter;
     @Autowired
     private CustomRestUnauthorizedEntryPoint restAuthenticationEntryPoint;
 
@@ -49,31 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationManager();
     }
 
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/api/register/**").hasRole("ADMIN")
-//                .anyRequest().authenticated()
-//                .and()
-//                .exceptionHandling()
-//                .authenticationEntryPoint(restAuthenticationEntryPoint)
-//                .accessDeniedHandler(restAccessDeniedHandler)
-//                .and()
-//                .formLogin()
-//                .loginProcessingUrl("/authenticate").permitAll()
-//                .successHandler(restAuthenticationSuccessHandler)
-//                .failureHandler(restAuthenticationFailureHandler)
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-//                .deleteCookies("JSESSIONID")
-//                .permitAll().and().httpBasic();
-//    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
