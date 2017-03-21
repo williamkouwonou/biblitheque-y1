@@ -13,11 +13,19 @@
 <div  class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li ng-show="authenticated" ng-class="{active:nav.tab('home')}"><a href="#/"><i class="fa fa-fw fa-home"></i>home</a></li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="demo" class="collapse">
 
+                <li ng-show="authenticated" ng-class="{active:nav.tab('register')}"><a href="#/register"><i class="fa fa-fw fa-user"></i>Nouveau</a></li>
+                <li ng-show="authenticated" ng-class="{active:nav.tab('list')}"><a href="#/list"><i class="fa fa-fw fa-list"></i>List</a></li>
+
+
+
+            </ul>
+        </li>
         <!--li ng-show="!authenticated" ng-class="{active:nav.tab('navigation')}"><a href="login">login</a></li-->
-        <li ng-show="authenticated" ng-class="{active:nav.tab('register')}"><a href="#/register"><i class="fa fa-fw fa-user"></i>Register</a></li>
-        <li ng-show="authenticated" ng-class="{active:nav.tab('list')}"><a href="#/list"><i class="fa fa-fw fa-list"></i>List</a></li>
-       
+
 
 
 
@@ -37,9 +45,11 @@
             <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Membres <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="demo" class="collapse">
-                <li>
+         
+        
+        <li>
                     <a href="#">Dropdown Item</a>
                 </li>
                 <li>
