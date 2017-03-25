@@ -6,6 +6,7 @@
 package com.biblio.entity;
 
 import com.biblio.config.util.Constants;
+import com.biblio.entity.util.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -23,6 +24,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -57,7 +59,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
-    
+
     @JsonIgnore
     private String password;
 
@@ -80,8 +82,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date", nullable = true)
     private ZonedDateTime resetDate = null;
-    
-    private Boolean membre;
+
+    private Profile profile;
+    @Transient
+    private String profileLibelle;
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -235,21 +239,29 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return true;
     }
 
-  
-
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
     }
     private static final Logger LOG = Logger.getLogger(User.class.getName());
 
-    public Boolean getMembre() {
-        return membre;
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void setMembre(Boolean membre) {
-        this.membre = membre;
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
-    
+    public String getProfileLibelle() {
+        if (profile != null) {
+            profileLibelle = profile.toString();
+        }
+        return profileLibelle;
+    }
+
+    public void setProfileLibelle(String profileLibelle) {
+        this.profileLibelle = profileLibelle;
+    }
+
 }

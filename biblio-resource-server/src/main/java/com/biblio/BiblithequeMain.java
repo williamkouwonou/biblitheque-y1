@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -58,8 +59,23 @@ public class BiblithequeMain {
             
             System.out.println("uu "+u.getNom()+"  "+u.getPrenom());
             modele.put("name", u.getNom()+" "+u.getPrenom());
+            modele.put("nom", u.getNom());
+            modele.put("prenom", u.getPrenom());
+            modele.put("dateNaissance", u.getDateNaissance());
+            modele.put("login", u.getLogin());
+            modele.put("email", u.getEmail());
+            modele.put("tel", u.getTel());
+            modele.put("id", u.getId());
         }
         return modele;
     }
-    
+     @RequestMapping(value = "/logout2", method = RequestMethod.GET)
+    public Object logout1() {
+         Map<String, Object> modele = new HashMap<>();
+                  System.out.println("HHHHHHHHHHHHHHHHHHHHhh");
+
+         modele.put("nom", "william");
+         return modele;
+                 
+    }
 }

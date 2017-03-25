@@ -13,7 +13,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
@@ -23,8 +25,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @Configuration
 @Order(-20)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
-  private  SimpleCorsFilter simpleCorsFilter;
+    private SimpleCorsFilter simpleCorsFilter;
     @Autowired
     private CustomRestUnauthorizedEntryPoint restAuthenticationEntryPoint;
 
@@ -51,18 +54,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationManager();
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // @formatter:off
-        http
-                .formLogin().loginPage("/login").permitAll()
-                .and()
+        http.addFilterAfter(
+                new CustomFilter(),UsernamePasswordAuthenticationFilter.class)
                 .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
-                .antMatchers("/api/register/**").hasRole("ADMIN");
+                .antMatchers("/api/register/**").hasRole("ADMIN")
+                .antMatchers("/logout2/**").permitAll()
+                .and().formLogin()
+                .loginPage("/login").permitAll()
+                .and()
+                .logout().logoutUrl("/logout2").invalidateHttpSession(true).clearAuthentication(true)
+                .permitAll();
         // @formatter:on
     }
 }

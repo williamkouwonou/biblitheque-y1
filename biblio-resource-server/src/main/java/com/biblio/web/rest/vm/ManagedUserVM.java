@@ -15,7 +15,7 @@ public class ManagedUserVM extends UserDTO {
     public static final int PASSWORD_MAX_LENGTH = 100;
 
     private Long id;
-
+    private Integer type;
 
    
     @Size(min = PASSWORD_MIN_LENGTH, max = PASSWORD_MAX_LENGTH)
@@ -52,6 +52,14 @@ public class ManagedUserVM extends UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
    
     

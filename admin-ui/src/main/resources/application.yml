@@ -29,6 +29,9 @@ zuul:
     userregiser :
       path: /resource/user/create/**
       url: http://localhost:9071/biblio/api/user/register
+    userupdate :
+      path: /resource/user/update/**
+      url: http://localhost:9071/biblio/api/user/account
     userlist :
       path: /resource/user/listpage/**
       url: http://localhost:9071/biblio/api/user/listpage
@@ -38,6 +41,10 @@ zuul:
     userinfo:
       path: /userinfo/**
       url: http://localhost:9071/biblio/user/info
+    userlogout:
+      path: /globale/logout/**
+      url: http://localhost:9070/authserver/logout2
+    
 
 logging:
   level:

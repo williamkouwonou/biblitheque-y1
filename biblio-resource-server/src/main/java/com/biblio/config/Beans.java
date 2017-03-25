@@ -8,6 +8,7 @@ package com.biblio.config;
 import com.biblio.entity.Categorie;
 import com.biblio.entity.Role;
 import com.biblio.entity.User;
+import com.biblio.entity.util.Profile;
 import com.biblio.repository.RoleRepository;
 import com.biblio.repository.UserRepository;
 import com.biblio.security.util.ConstantRole;
@@ -69,7 +70,7 @@ public class Beans {
         u.setPrenom("admin");
         u.setEmail("admin@gmail.com");
         u.setPassword(passwordEncoder().encode("admin"));
-
+       u.setProfile(Profile.ADMIN);
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.findByName(ConstantRole.ADMIN_ROLE));
         roles.add(roleRepository.findByName(ConstantRole.USER_ROLE));

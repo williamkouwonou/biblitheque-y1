@@ -90,7 +90,13 @@ public class UserResource {
         }
 
         managedUserVM.setPassword("123456");
-        managedUserVM.getRoles().add(ConstantRole.USER_ROLE);
+        
+        if(managedUserVM.getType()!=null && managedUserVM.getType()==2){
+             managedUserVM.getRoles().add(ConstantRole.ADMIN_ROLE);
+        }else{
+             managedUserVM.getRoles().add(ConstantRole.USER_ROLE);
+        }
+       
         User u = userService.createUser(managedUserVM);
         modele.put(Constants.MESSAGE, "Enregistrement réussi");
         
@@ -146,6 +152,7 @@ public class UserResource {
      *
      * @param userDTO the user information
      * @param id id of account to update
+     * @param bindingResult
      * @return the ResponseEntity with status 200 (OK), or status 400 (Bad
      * Request) or 500 (Internal Server Error) if the user couldn't be updated
      */
@@ -176,7 +183,7 @@ public class UserResource {
         Optional<User> user = userRepository.findOneById(id);
         if (user.isPresent()) {
             userService.updateUser(id, userDTO.getLogin(), userDTO.getNom(), userDTO.getPrenom(), userDTO.getDateNaissance(), userDTO.getEmail(), userDTO.isActivated(),
-                    userDTO.getTel(), userDTO.getRoles());
+                    userDTO.getTel());
 
             modele.put(Constants.RESULTAT, "Opération réussi");
             return modele;
@@ -279,7 +286,12 @@ public class UserResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Object listeMembre(@RequestParam("mot") String mot, @RequestParam("page") int page, @RequestParam("size") int size) {
         mot = mot == null ? "%%" : "%" + mot + "%";
+        
+        
+        System.out.println("FF  "+mot+" page "+page+" SIZE "+size);
         Page<User> lu = userRepository.findByMoCle(mot, new PageRequest(page, size));
+        
+        System.out.println("SIZE "+lu.getSize());
         return lu;
     }
 

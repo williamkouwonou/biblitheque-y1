@@ -2,6 +2,7 @@ package com.biblio.service;
 
 import com.biblio.entity.Role;
 import com.biblio.entity.User;
+import com.biblio.entity.util.Profile;
 import com.biblio.repository.RoleRepository;
 import com.biblio.repository.UserRepository;
 import com.biblio.security.SecurityUtils;
@@ -129,7 +130,11 @@ public class UserService {
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(ZonedDateTime.now());
         user.setActivated(true);
-
+if(managedUserVM.getType()!=null && managedUserVM.getType()==2){
+    user.setProfile(Profile.ADMIN);
+}else{
+    user.setProfile(Profile.MEMBRE);
+}
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -149,7 +154,7 @@ public class UserService {
     }
 
     public void updateUser(Long id, String login, String nom, String prenom, Date dateNaissance, String email,
-            boolean activated, String tel, Set<String> roles) {
+            boolean activated, String tel) {
 
         userRepository
                 .findOneById(id)
@@ -162,11 +167,8 @@ public class UserService {
                     u.setDateNaissance(dateNaissance);
                     u.setTel(tel);
 
-                    Set<Role> managedRoles = u.getRoles();
-                    managedRoles.clear();
-                    roles.stream().forEach(
-                            role -> managedRoles.add(roleRepository.findOne(role))
-                    );
+                    u.getRoles();
+                   
                     log.debug("Changed Information for User: {}", u);
                 });
 

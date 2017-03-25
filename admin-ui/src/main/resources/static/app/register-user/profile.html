@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Membres   <small> Nouveau membre</small>
+            Membres   <small>Profile</small>
         </h1>
 
     </div>
@@ -12,7 +12,7 @@
     <div class="col-lg-12">
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <i class="fa fa-info-circle"></i>  <strong>Veuillez remplir les champs</strong> 
+            <i class="fa fa-info-circle"></i>  <strong>Voir profile</strong> 
         </div>
     </div>
 </div>
@@ -20,42 +20,43 @@
 <div class="col-md-6 col-md-offset-3">
 
     <flash-message duration="5000"  show-close="true" on-dismiss="myCallback(flash);" ></flash-message> 
-    <form name="form" ng-submit="vm.register()" role="form">
+    <form name="form" ng-submit="vm.registerProfile()" role="form">
 
-        <div ng-show="!vm.user.id" class="form-group" ng-class="{ 'has-error': form.nom.$dirty && form.nom.$error.required }">
+        <div  class="form-group" >
             
             <label >
-                <input type="radio" ng-model="vm.user.type" value="1">
-                Membre
+                <input type="radio" ng-model="vm.mode" value="1">
+                Voir
             </label>
             <label >
-                <input type="radio" ng-model="vm.user.type" value="2">
-                Administrateur
+                <input type="radio" ng-model="vm.mode" value="2">
+               Modifier
             </label>
         </div>
+        
         <div class="form-group" ng-class="{ 'has-error': form.nom.$dirty && form.nom.$error.required }">
             <label for="nom">Nom </label>
-            <input type="text" name="nom" id="nom" class="form-control" ng-model="vm.user.nom" required />
-            <span ng-show="form.nom.$dirty && form.nom.$error.required" class="help-block">Le nom est obligatoire</span>
+            <input ng-disabled ="vm.mode==1" type="text" name="nom" id="nom" class="form-control" ng-model="userinfo.nom" required />
+            <span  ng-show="form.nom.$dirty && form.nom.$error.required" class="help-block">Le nom est obligatoire</span>
             <span ng-show="vm.error.nom" class="help-block">{{vm.error.nom}}</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.prenom.$dirty && form.prenom.$error.required }">
             <label for="prenom">Prenoms :</label>
-            <input type="text" name="prenom" id="prenom" class="form-control" ng-model="vm.user.prenom" required />
-            <span ng-show="form.prenom.$dirty && form.prenom.$error.required" class="help-block">Le prenom est obligatoire</span>
+            <input ng-disabled ="vm.mode==1" type="text" name="prenom" id="prenom" class="form-control" ng-model="userinfo.prenom" required />
+            <span  ng-show="form.prenom.$dirty && form.prenom.$error.required" class="help-block">Le prenom est obligatoire</span>
             <span ng-show="vm.error.prenom" class="help-block">{{vm.error.prenom}}</span>
         </div>
 
         <div class="form-group" ng-class="{ 'has-error': form.dateNaissance.$dirty && form.dateNaissance.$error.required }">
             <label for="dateNaissance">Date de naissance :</label>
-            <input datetime="yyyy-MM-dd" type="date" name="dateNaissance" id="dateNaissance" class="form-control" ng-model="vm.user.dateNaissance" required />
+            <input ng-disabled ="vm.mode==1" datetime="yyyy-MM-dd" type="date" name="dateNaissance" id="dateNaissance" class="form-control" ng-model="userinfo.dateNaissance" required />
             <span ng-show="form.dateNaissance.$dirty && form.dateNaissance.$error.required" class="help-block">La date de naissance est obligatoire</span>
             <span ng-show="vm.error.dateNaissance" class="help-block">{{vm.error.dateNaissance}}</span>
         </div>
 
         <div class="form-group" ng-class="{ 'has-error': form.tel.$dirty && form.tel.$error.required }">
             <label for="tel">Tel :</label>
-            <input type="text" name="tel" id="tel" class="form-control" ng-model="vm.user.tel" required />
+            <input ng-disabled ="vm.mode==1" type="text" name="tel" id="tel" class="form-control" ng-model="userinfo.tel" required />
             <span ng-show="form.tel.$dirty && form.tel.$error.required" class="help-block">Le numero de telephone est obligatoire</span>
             <span ng-show="vm.error.tel" class="help-block">{{vm.error.tel}}</span>
         </div>
@@ -63,20 +64,20 @@
 
         <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
             <label for="email">Email :</label>
-            <input type="text" name="email" id="email" class="form-control" ng-model="vm.user.email" required />
+            <input ng-disabled ="vm.mode==1" type="text" name="email" id="email" class="form-control" ng-model="userinfo.email" required />
             <span ng-show="form.email.$dirty && form.email.$dirty && form.email.$error.required" class="help-block">L'email est obligatoire</span>
             <span ng-show="vm.error.email" class="help-block">{{vm.error.email}}</span>
         </div>
 
-        <div ng-show="!vm.user.id" class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+        <div  class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">Login</label>
-            <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.login" required />
+            <input ng-disabled ="true"  type="text" name="username" id="username" class="form-control" ng-model="userinfo.login" required />
             <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Le login est obligatoire</span>
             <span ng-show="vm.error.login" class="alert-danger">{{vm.error.login}}</span>
         </div>
 
         <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Enregister</button>
+            <button type="submit" ng-show="vm.mode!==1" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Enregister</button>
             <!--img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /-->
             <!--a href="#!/login" class="btn btn-link">Cancel</a-->
         </div>

@@ -23,7 +23,6 @@ public class CustomRestAuthenticationSuccessHandler extends SimpleUrlAuthenticat
             throws ServletException, IOException {
         if (authentication != null) {
            
-           
             CustomSecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, authentication.getPrincipal());
         }
     }

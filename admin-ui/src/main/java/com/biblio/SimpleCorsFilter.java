@@ -33,7 +33,7 @@ public class SimpleCorsFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
 
-        System.out.println("FFFFFFFFFF  " + request.getHeader("Origin"));
+        System.out.println("FFFFFFFFFF  " + request.getRequestURL());
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
