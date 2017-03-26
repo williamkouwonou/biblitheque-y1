@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies']).config(function ($routeProvider, $httpProvider) {
+angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).config(function ($routeProvider, $httpProvider) {
 
 
     $routeProvider
@@ -23,7 +23,7 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies']).config(function ($rou
                 controller: 'UserController',
                 controllerAs: 'vm'
             })
-            .otherwise('login');
+            .otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     $httpProvider.defaults.headers.common['Accept'] = 'application/json';

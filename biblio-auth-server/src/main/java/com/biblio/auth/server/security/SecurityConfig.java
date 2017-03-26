@@ -14,9 +14,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.AbstractRequestLoggingFilter;
 
 /**
  *
@@ -56,8 +61,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        
+       
+        
         http.addFilterAfter(
-                new CustomFilter(),UsernamePasswordAuthenticationFilter.class)
+                new CustomFilter(),SessionManagementFilter.class)
                 .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
                 .and()
                 .authorizeRequests()

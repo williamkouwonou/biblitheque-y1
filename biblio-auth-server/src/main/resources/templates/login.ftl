@@ -6,7 +6,7 @@
 <body>
 <#if RequestParameters['error']??>
 	<div class="alert alert-danger">
-		There was a problem logging in. Please try again.
+		Paremtre de connexion incorrect
 	</div>
 </#if>
 	<div class="container">
@@ -22,6 +22,7 @@
 		    <input type="password" class="form-control" id="password" name="password"/>
 		  </div>
 		  <input type="hidden" id="csrf_token" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		  <input type="hidden" id="endpoint" name="endpoint" value="web"/>
 		<div class="form-actions">
                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

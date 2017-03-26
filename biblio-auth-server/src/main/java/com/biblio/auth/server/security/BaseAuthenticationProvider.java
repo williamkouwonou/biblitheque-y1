@@ -56,6 +56,8 @@ public class BaseAuthenticationProvider implements AuthenticationProvider {
             User user = userRepository.findByLogin(username);
             
             System.out.println("GGG "+user);
+            
+            System.out.println("ENDPOINT "+getHeadersInfo().get("web"));
             if (user == null || !user.getLogin().equalsIgnoreCase(username)) {
                 throw new BadCredentialsException("unknown user");
             }

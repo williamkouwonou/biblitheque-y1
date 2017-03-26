@@ -14,8 +14,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.springframework.security.web.authentication.logout.CookieClearingLogoutHandler;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.filter.GenericFilterBean;
 
 /**
@@ -31,7 +29,7 @@ public class CustomFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) req;
          System.out.println("XXXXXXXXXXXXXXXXX  "+request.getRequestURL());
         HttpSession httpSession =request.getSession();
-        if(request.getRequestURL().toString().contains("login")){
+        if(request.getRequestURL().toString().contains("token")){
             Cookie[] c = request.getCookies();
             
             if(c!=null){

@@ -1,5 +1,5 @@
-angular.module('app').controller('UserController', ['$rootScope','$location', 'Flash', 'UserService', function ($rootScope,$location, Flash, UserService) {
-        console.info("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+angular.module('app').controller('UserController', ['$rootScope', '$location', 'Flash', 'UserService', 'FileUploader', function ($rootScope, $location, Flash, UserService, FileUploader) {
+
         var vm = this;
 
         vm.register = register;
@@ -9,11 +9,11 @@ angular.module('app').controller('UserController', ['$rootScope','$location', 'F
         vm.page = 0;
         vm.mot = '';
         vm.edit = edit;
-        vm.mode=1;
+        vm.mode = 1;
         vm.goToPage = goToPage;
         chercher();
         initUser();
-        
+       
         function Create() {
             vm.dataLoading = true;
             UserService.Create(vm.user)
@@ -36,16 +36,16 @@ angular.module('app').controller('UserController', ['$rootScope','$location', 'F
         function register() {
             if (vm.user.id) {
                 update();
-                  $location.path("/list");
+                $location.path("/list");
             } else {
                 Create();
             }
         }
-       vm.registerProfile= function () {
-           vm.user=angular.copy($rootScope.userinfo);
-          
-                update();
-           vm.mode=1;
+        vm.registerProfile = function () {
+            vm.user = angular.copy($rootScope.userinfo);
+
+            update();
+            vm.mode = 1;
         };
         function update() {
             vm.dataLoading = true;
@@ -55,7 +55,7 @@ angular.module('app').controller('UserController', ['$rootScope','$location', 'F
 
                             vm.user = {nom: '', prenom: '', dateNaissance: null, email: '', login: '', tel: ''};
                             vm.error = {};
-                          
+
                         } else {
                             vm.error = response;
 
@@ -86,13 +86,13 @@ angular.module('app').controller('UserController', ['$rootScope','$location', 'F
             vm.page = page;
             vm.chercher();
         }
-        function initUser(){
-           
-                vm.user = angular.copy(UserService.user);
-                
-                console.info(JSON.stringify(vm.user));
-                UserService.user={nom: '', prenom: '', dateNaissance: null, email: '', login: '', tel: ''};
-            
+        function initUser() {
+
+            vm.user = angular.copy(UserService.user);
+
+            console.info(JSON.stringify(vm.user));
+            UserService.user = {nom: '', prenom: '', dateNaissance: null, email: '', login: '', tel: ''};
+
         }
         function edit(id) {
 
