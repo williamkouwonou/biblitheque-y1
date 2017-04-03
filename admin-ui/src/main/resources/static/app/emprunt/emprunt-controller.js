@@ -22,7 +22,7 @@ angular.module('app').controller('EmpruntController', ['$rootScope', '$location'
                             vm.isbn="";
                             vm.login="";
                             vm.error = {};
-                            Flash.create('success', response.message, 4000, {class: 'custom-class', id: 'custom-id'}, true);
+                            Flash.create('success', response.message, 8000, {class: 'custom-class', id: 'custom-id'}, true);
                         } else {
                             vm.error = response;
 
