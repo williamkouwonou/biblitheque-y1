@@ -23,12 +23,12 @@ angular.module('app').controller('UserController', ['$rootScope', '$location', '
                             vm.user = null;
                             vm.user = {nom: '', prenom: '', dateNaissance: null, email: '', login: '', tel: ''};
                             vm.error = {};
-                            Flash.create('success', response.message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                            Flash.create('success', response.message, 4000, {class: 'custom-class', id: 'custom-id'}, true);
                         } else {
                             vm.error = response;
 
                             vm.dataLoading = false;
-                            Flash.create('warning', response.message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                            Flash.create('warning', response.message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
 
                         }
                     });
@@ -60,7 +60,7 @@ angular.module('app').controller('UserController', ['$rootScope', '$location', '
                             vm.error = response;
 
                             vm.dataLoading = false;
-                            Flash.create('warning', response.message, 0, {class: 'custom-class', id: 'custom-id'}, true);
+                            Flash.create('warning', response.message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
 
                         }
                     });

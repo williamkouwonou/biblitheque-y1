@@ -28,7 +28,7 @@
                 <label for="categorie" class="control-label">Categorire</label>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                <select id="categorie" class="form-control" ng-model="vm.categorie" ng-options="x.id as (x.designation) for x in vm.categories| orderBy:'designation'">
+                <select id="categorie" class="form-control" ng-model="vm.categorie" ng-options="x.id as (x.designation) for x in vm.categories| orderBy:'designation'" required>
 
                 </select>
                 <span ng-show="form.categorie.$dirty && form.categorie.$error.required" class="help-block">La catégorie est obligatoire</span>
@@ -81,8 +81,8 @@
             <label for="edition">Edition :</label>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-            <input type="text" name="edition" id="edition" class="form-control" ng-model="vm.livre.edition" required />
-            <span ng-show="form.edition.$dirty && form.edition.$error.required" class="help-block">Le numero de editionephone est obligatoire</span>
+            <input type="number" name="edition" id="edition" class="form-control" ng-model="vm.livre.edition" required />
+            <span ng-show="form.edition.$dirty && form.edition.$error.required" class="help-block">Le numero d'étionephone est obligatoire</span>
             <span ng-show="vm.error.edition" class="help-block">{{vm.error.edition}}</span>
         </div>
         </div>
@@ -114,7 +114,7 @@
             <label for="quantite">Quantite</label>
             </div>
              <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-            <input type="text" name="quantite" id="quantite" class="form-control" ng-model="vm.livre.quantite" required />
+            <input type="number" name="quantite" id="quantite" class="form-control" ng-model="vm.livre.quantite" required />
             <span ng-show="form.quantite.$dirty && form.quantite.$error.required" class="help-block">La quantité est obligatoire</span>
             <span ng-show="vm.error.quantite" class="alert-danger">{{vm.error.quantite}}</span>
         </div>
