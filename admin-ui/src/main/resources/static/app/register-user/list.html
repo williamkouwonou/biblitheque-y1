@@ -16,12 +16,14 @@
         </div>
     </div>
 </div>
-
-<form>
+<div class="col-md-6 col-md-offset-3">
+    <form>
 
     <input type="text" ng-model="vm.mot" >
-    <button ng-click="vm.chercher()" > Chercher</button>
+    <button ng-click="vm.chercher()" class="btn btn-primary" > Chercher</button>
 </form>
+</div>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="box box-boa">
@@ -58,7 +60,7 @@
                             <td>
                                 <div class="btn-toolbar">
                                     <button type="button" ng-click="vm.edit(u.id)" class="btn  btn-primary" title="modifier"><i class="fa fa-edit"></i></button>
-                                    <button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button>
+                                    <!--button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button-->
                                 </div>
                             </td>
                         </tr>

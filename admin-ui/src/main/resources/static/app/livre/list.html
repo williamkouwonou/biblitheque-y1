@@ -11,25 +11,30 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="alert alert-info alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <i class="fa fa-info-circle"></i>  <strong>Liste des livres</strong> 
+           <form>
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <input type="text" ng-model="vm.mot" class="form-control" >
+</div>
+    <button ng-click="vm.chercher()" class="btn btn-primary" > Chercher</button>
+</form>
         </div>
     </div>
 </div>
 
-<form>
 
-    <input type="text" ng-model="vm.mot" >
-    <button ng-click="vm.chercher()" > Chercher</button>
-</form>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            
+            <i class="fa fa-info-circle"></i>  <strong>Liste des livres</strong> 
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box box-boa">
-            <div class="box-header">
-                <h3 class="box-title">Liste des livres</h3>
-
-
-            </div>
+           
             <!-- Default panel contents -->
             <div class="table-responsive">
                 <table id="agenceListe"   class="table table-hover  table-bordered table-striped">
@@ -66,7 +71,7 @@
                             <td>
                                 <div class="btn-toolbar">
                                     <button type="button" ng-click="vm.edit(u.id)" class="btn  btn-primary" title="modifier"><i class="fa fa-edit"></i></button>
-                                    <button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button>
+                                    <!--button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button-->
                                 </div>
                             </td>
                         </tr>

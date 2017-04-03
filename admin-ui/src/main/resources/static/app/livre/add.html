@@ -23,7 +23,7 @@
     <form class="form-horizontal" name="form" ng-submit="vm.register()" role="form">
 
 
-        <div class="form-group" ng-class="{ 'has-error': form.categorie.$dirty && form.categories.$error.required }">
+        <div ng-show="!vm.livre.id" class="form-group" ng-class="{ 'has-error': form.categorie.$dirty && form.categories.$error.required }">
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <label for="categorie" class="control-label">Categorire</label>
             </div>

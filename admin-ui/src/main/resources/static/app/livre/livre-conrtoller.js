@@ -50,6 +50,7 @@ angular.module('app').controller('LivreController', ['$rootScope', '$location', 
         };
         function update() {
             vm.dataLoading = true;
+            vm.categorie=vm.livre.categorie.id;
             vm.livre.categorie=null;
             LivreService.Update(vm.livre,vm.categorie)
                     .then(function (response) {
