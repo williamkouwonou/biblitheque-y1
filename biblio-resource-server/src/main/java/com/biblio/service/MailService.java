@@ -1,6 +1,6 @@
 package com.biblio.service;
 
-import com.biblio.entity.User;
+import com.biblio.user.module.entity.User;
 import org.apache.commons.lang.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

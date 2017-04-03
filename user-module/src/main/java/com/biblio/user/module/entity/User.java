@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.biblio.auth.server;
+package com.biblio.user.module.entity;
 
-
+import com.biblio.user.module.utils.Constants;
+import com.biblio.user.module.utils.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +24,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -30,10 +34,10 @@ import org.hibernate.validator.constraints.Email;
 
 /**
  *
- * @author alindaessi
+ * @author kouwonou
  */
 @Entity
-public class User implements Serializable {
+public class User extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,16 +51,16 @@ public class User implements Serializable {
     private String tel;
 
     @Email
-   
+    @Pattern(regexp = Constants.EMAIL_REGEX)
     private String email;
 
     @NotNull
-   
+    @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
     private String login;
-    
-    
+
+    @JsonIgnore
     private String password;
 
     @NotNull
@@ -77,7 +81,13 @@ public class User implements Serializable {
     private String resetKey;
 
     @Column(name = "reset_date", nullable = true)
-    private ZonedDateTime resetDate = null;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date resetDate = null;
+
+    private Profile  profile;
+    @Transient
+    private String profileLibelle;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_role",
@@ -185,13 +195,15 @@ public class User implements Serializable {
         this.resetKey = resetKey;
     }
 
-    public ZonedDateTime getResetDate() {
+    public Date getResetDate() {
         return resetDate;
     }
 
-    public void setResetDate(ZonedDateTime resetDate) {
+    public void setResetDate(Date resetDate) {
         this.resetDate = resetDate;
     }
+
+    
 
     public Set<Role> getRoles() {
         return roles;
@@ -203,8 +215,9 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash = 71 * hash + Objects.hashCode(this.login);
+        hash = 71 * hash + Objects.hashCode(this.roles);
         return hash;
     }
 
@@ -223,13 +236,35 @@ public class User implements Serializable {
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
+        if (!Objects.equals(this.roles, other.roles)) {
+            return false;
+        }
         return true;
     }
 
-//    @Override
-//    public String toString() {
-//        return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
-//    }
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", tel=" + tel + ", email=" + email + ", login=" + login + ", password=" + password + ", activated=" + activated + ", langKey=" + langKey + ", activationKey=" + activationKey + ", resetKey=" + resetKey + ", resetDate=" + resetDate + ", roles=" + roles + '}';
+    }
+    private static final Logger LOG = Logger.getLogger(User.class.getName());
 
-    
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public String getProfileLibelle() {
+        if (profile != null) {
+            profileLibelle = profile.toString();
+        }
+        return profileLibelle;
+    }
+
+    public void setProfileLibelle(String profileLibelle) {
+        this.profileLibelle = profileLibelle;
+    }
+
 }

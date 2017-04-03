@@ -23,6 +23,31 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
                 controller: 'UserController',
                 controllerAs: 'vm'
             })
+            .when('/categorie', {
+                templateUrl: 'app/categorie/add.html',
+                controller: 'CategorieController',
+                controllerAs: 'vm'
+            })
+            .when('/addbook', {
+                templateUrl: 'app/livre/add.html',
+                controller: 'LivreController',
+                controllerAs: 'vm'
+            })
+            .when('/listbook', {
+                templateUrl: 'app/livre/list.html',
+                controller: 'LivreController',
+                controllerAs: 'vm'
+            })
+            .when('/listemprunt', {
+                templateUrl: 'app/emprunt/list.html',
+                controller: 'EmpruntController',
+                controllerAs: 'vm'
+            })
+            .when('/addemprunt', {
+                templateUrl: 'app/emprunt/add.html',
+                controller: 'EmpruntController',
+                controllerAs: 'vm'
+            })
             .otherwise('/');
 
     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

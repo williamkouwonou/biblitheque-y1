@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Emprunts   <small> Nouvel emprunt</small>
+        </h1>
+
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <i class="fa fa-info-circle"></i>  <strong>Veuillez remplir les champs</strong> 
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+
+    <flash-message duration="5000"  show-close="true" on-dismiss="myCallback(flash);" ></flash-message> 
+    <form name="form" ng-submit="vm.register()" role="form">
+
+        <div class="form-group" ng-class="{ 'has-error': form.isbn.$dirty && form.isbn.$error.required }">
+            <label for="isbn">Titre </label>
+            <input type="text" name="isbn" id="isbn" class="form-control" ng-model="vm.isbn" required />
+            <span ng-show="form.isbn.$dirty && form.isbn.$error.required" class="help-block">Le isbn est obligatoire</span>
+            <span ng-show="vm.error.isbn" class="help-block">{{vm.error.isbn}}</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.login.$dirty && form.login.$error.required }">
+            <label for="login">Prenoms :</label>
+            <input type="text" name="login" id="login" class="form-control" ng-model="vm.login" required />
+            <span ng-show="form.login.$dirty && form.login.$error.required" class="help-block">Le login est obligatoire</span>
+            <span ng-show="vm.error.login" class="help-block">{{vm.error.login}}</span>
+        </div>
+
+        
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Enregister</button>
+            
+        </div>
+    </form>
+</div>

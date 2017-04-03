@@ -5,17 +5,19 @@
  */
 package com.biblio.web.rest;
 
-import com.biblio.config.util.Constants;
-import com.biblio.entity.User;
-import com.biblio.repository.UserRepository;
+
 import com.biblio.security.SecurityUtils;
 import com.biblio.security.util.ConstantRole;
 import com.biblio.service.MailService;
 import com.biblio.service.UserService;
 import com.biblio.service.dto.UserDTO;
+import com.biblio.user.module.entity.User;
+import com.biblio.user.module.repository.UserRepository;
+import com.biblio.user.module.utils.Constants;
 import com.biblio.web.rest.vm.KeyAndPasswordVM;
 import com.biblio.web.rest.vm.ManagedUserVM;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -306,7 +308,7 @@ public class UserResource {
            
         if (u != null) {
             u.setActivated(false);
-            u.setLastModifiedDate(ZonedDateTime.now());
+            u.setLastModifiedDate(new Date());
             userRepository.saveAndFlush(u);
             modele.put(Constants.MESSAGE, "Opération Réussie");
             return modele;

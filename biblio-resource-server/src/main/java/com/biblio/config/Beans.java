@@ -5,16 +5,15 @@
  */
 package com.biblio.config;
 
-import com.biblio.entity.Categorie;
-import com.biblio.entity.Role;
-import com.biblio.entity.User;
-import com.biblio.entity.util.Profile;
-import com.biblio.repository.RoleRepository;
-import com.biblio.repository.UserRepository;
+
 import com.biblio.security.util.ConstantRole;
+import com.biblio.user.module.entity.Role;
+import com.biblio.user.module.entity.User;
+import com.biblio.user.module.repository.RoleRepository;
+import com.biblio.user.module.repository.UserRepository;
+import com.biblio.user.module.utils.Profile;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.inject.Inject;

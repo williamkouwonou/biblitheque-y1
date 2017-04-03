@@ -21,8 +21,8 @@ import org.springframework.stereotype.Component;
  *
  * @author kouwonou
  */
-@Component
-@Order(0)
+//@Component
+//@Order(0)
 public class SimpleCorsFilter implements Filter {
 
     public SimpleCorsFilter() {

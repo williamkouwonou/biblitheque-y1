@@ -1,6 +1,7 @@
 package com.biblio.service.dto;
 
-import com.biblio.config.util.Constants;
+
+import com.biblio.user.module.utils.Constants;
 import com.biblio.web.rest.util.Utils;
 import java.text.ParseException;
 import java.util.Date;

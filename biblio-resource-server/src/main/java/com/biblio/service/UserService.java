@@ -1,13 +1,14 @@
 package com.biblio.service;
 
-import com.biblio.entity.Role;
-import com.biblio.entity.User;
-import com.biblio.entity.util.Profile;
-import com.biblio.repository.RoleRepository;
-import com.biblio.repository.UserRepository;
+
 import com.biblio.security.SecurityUtils;
 import com.biblio.security.util.ConstantRole;
 import com.biblio.service.util.RandomUtil;
+import com.biblio.user.module.entity.Role;
+import com.biblio.user.module.entity.User;
+import com.biblio.user.module.repository.RoleRepository;
+import com.biblio.user.module.repository.UserRepository;
+import com.biblio.user.module.utils.Profile;
 import com.biblio.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +57,8 @@ public class UserService {
 
         return userRepository.findOneByResetKey(key)
                 .filter(user -> {
-                    ZonedDateTime oneDayAgo = ZonedDateTime.now().minusHours(24);
-                    return user.getResetDate().isAfter(oneDayAgo);
+                   Date oneDayAgo = new Date();
+                    return user.getResetDate().after(oneDayAgo);
                 })
                 .map(user -> {
                     user.setPassword(passwordEncoder.encode(newPassword));
@@ -73,7 +74,7 @@ public class UserService {
                 .filter(User::getActivated)
                 .map(user -> {
                     user.setResetKey(RandomUtil.generateResetKey());
-                    user.setResetDate(ZonedDateTime.now());
+                    user.setResetDate(new Date());
                     userRepository.save(user);
                     return user;
                 });
@@ -128,7 +129,7 @@ public class UserService {
         String encryptedPassword = passwordEncoder.encode(managedUserVM.getPassword());
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
-        user.setResetDate(ZonedDateTime.now());
+        user.setResetDate(new Date());
         user.setActivated(true);
 if(managedUserVM.getType()!=null && managedUserVM.getType()==2){
     user.setProfile(Profile.ADMIN);

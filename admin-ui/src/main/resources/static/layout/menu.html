@@ -24,6 +24,25 @@
 
             </ul>
         </li>
+        <li ng-show="authenticated">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-arrows-v"></i> Livres <i class="fa fa-fw fa-book"></i></a>
+            <ul id="demo1" class="collapse">
+
+                <li ng-show="authenticated" ng-class="{active:nav.tab('addbook')}"><a href="#/addbook"><i class="fa fa-fw fa-edit"></i>Nouveau</a></li>
+                <li ng-show="authenticated" ng-class="{active:nav.tab('listbook')}"><a href="#/listbook"><i class="fa fa-fw fa-list"></i>List</a></li>
+                <li ng-show="authenticated" ng-class="{active:nav.tab('categorie')}"><a href="#/categorie"><i class="fa fa-fw fa-tag"></i>Catégorie</a></li>
+
+            </ul>
+        </li>
+        <li ng-show="authenticated">
+            <a href="javascript:;" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-arrows-v"></i> Emprunts <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="demo2" class="collapse">
+
+                <li ng-show="authenticated" ng-class="{active:nav.tab('addemprunt')}"><a href="#/addemprunt"><i class="fa fa-fw fa-user"></i>Nouvel</a></li>
+                <li ng-show="authenticated" ng-class="{active:nav.tab('listemprunt')}"><a href="#/listemprunt"><i class="fa fa-fw fa-list"></i>List</a></li>
+
+            </ul>
+        </li>
         <!--li ng-show="!authenticated" ng-class="{active:nav.tab('navigation')}"><a href="login">login</a></li-->
 
 

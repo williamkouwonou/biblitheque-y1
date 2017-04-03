@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.biblio.auth.server.reposotory;
+package com.biblio.user.module.repository;
 
 
-import com.biblio.auth.server.Role;
+import com.biblio.user.module.entity.Role;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

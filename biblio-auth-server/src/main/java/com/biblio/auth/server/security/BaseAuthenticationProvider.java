@@ -6,8 +6,9 @@
 package com.biblio.auth.server.security;
 
 
-import com.biblio.auth.server.User;
-import com.biblio.auth.server.reposotory.UserRepository;
+
+import com.biblio.user.module.entity.User;
+import com.biblio.user.module.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;

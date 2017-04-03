@@ -34,5 +34,7 @@ public interface LivreRepository extends JpaRepository<Livre, Long> {
     public Page<Livre> findByCategorie(@Param("id") Long IdCategorie, Pageable p);
 
     @Query("SELECT l FROM Livre l WHERE l.titre LIKE :motCle OR l.auteurs LIKE :motCle OR l.resume LIKE :motCle OR l.categorie.designation LIKE :motCle  OR l.categorie.description LIKE :motCle")
-    public List<Livre> findByMotCle(String motCle);
+    public List<Livre> findByMotCle(@Param("motCle")String motCle);
+    @Query("SELECT l FROM Livre l WHERE l.titre LIKE :motCle OR l.auteurs LIKE :motCle OR l.resume LIKE :motCle OR l.categorie.designation LIKE :motCle  OR l.categorie.description LIKE :motCle")
+    public Page<Livre> findByMotCle(@Param("motCle")String motCle,Pageable p);
 }

@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Livres <small>  Categorie</small>
+        </h1>
+       <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <i class="fa fa-info-circle"></i>  <strong>Veuillez remplir les champs</strong> 
+        </div>
+    </div>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="col-md-6 col-md-offset-3">
+ <form name="form" ng-submit="vm.register()" role="form">
+
+       
+        <div class="form-group" ng-class="{ 'has-error': form.designation.$dirty && form.designation.$error.required }">
+            <label for="designation">Nom </label>
+            <input type="text" name="designation" id="designation" class="form-control" ng-model="vm.categorie.designation" required />
+            <span ng-show="form.designation.$dirty && form.designation.$error.required" class="help-block">La designation est obligatoire</span>
+            <span ng-show="vm.error.designation" class="help-block">{{vm.error.designation}}</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required }">
+            <label for="description">Designations :</label>
+            <input type="text" name="description" id="description" class="form-control" ng-model="vm.categorie.description" required />
+            <span ng-show="form.description.$dirty && form.description.$error.required" class="help-block">La description est obligatoire</span>
+            <span ng-show="vm.error.description" class="help-block">{{vm.error.description}}</span>
+        </div>
+     <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || !vm.dataLoading" class="btn btn-primary">Enregister</button>
+            
+        </div>
+ </form>
+</div>
+
+<div class="row">
+    
+</div>
+
+<form>
+
+    <input type="text" ng-model="vm.mot" >
+    <button ng-click="vm.chercher()" > Chercher</button>
+</form>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-boa">
+            <div class="box-header">
+                <h3 class="box-title">Liste des Categories</h3>
+
+
+            </div>
+            <!-- Default panel contents -->
+            <div class="table-responsive">
+                <table id="agenceListe"   class="table table-hover  table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Designation</th>
+                            <th>Description</th>
+                            
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in vm.categories">
+                            <td><span ng-bind="u.designation"></span></td>
+                            <td><span ng-bind="u.description"></span></td>
+                            
+                            
+                            <td>
+                                <div class="btn-toolbar">
+                                    <button type="button" ng-click="vm.edit(u.id)" class="btn  btn-primary" title="modifier"><i class="fa fa-edit"></i></button>
+                                    <button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="container spacer">
+                <ul class="nav nav-pills">
+                    <li class="clickable" ng-repeat="p in vm.pages track by $index">
+                        <a ng-click="vm.goToPage($index)" > {{$index}}</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

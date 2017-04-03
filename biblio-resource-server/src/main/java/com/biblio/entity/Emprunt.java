@@ -5,6 +5,8 @@
  */
 package com.biblio.entity;
 
+import com.biblio.service.util.RandomUtil;
+import com.biblio.user.module.entity.User;
 import com.biblio.web.rest.util.Utils;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -143,5 +145,7 @@ public class Emprunt implements Serializable {
     @PrePersist
     public void init(){
         etat=false;
+        dateEmprunt= new Date();
+        reference = RandomUtil.getRref();
     }
 }

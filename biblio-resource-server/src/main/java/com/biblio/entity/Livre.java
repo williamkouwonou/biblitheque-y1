@@ -9,9 +9,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -23,21 +27,28 @@ import javax.persistence.Temporal;
 public class Livre implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     /**
      * le titre du livre
      */
+    @NotNull
+    @Size(min = 2)
     @Column(length = 250, nullable = false)
     private String titre;
     /**
      * les auteurs du livre separé par des ,
      */
+    @NotNull
+    @Size(min = 2)
     @Column(nullable = false)
     private String auteurs;
     /**
      * éditeur du livre
      */
     private String editeur;
+
+    private Integer edition;
     /**
      * collection
      */
@@ -55,6 +66,8 @@ public class Livre implements Serializable {
     /**
      * code barre
      */
+    @NotNull
+    @Size(min = 2)
     @Column(nullable = false)
     private String isbn;
     /**
@@ -66,30 +79,14 @@ public class Livre implements Serializable {
     /**
      * quantité de livre restant
      */
-    private int quantite = 0;
+    private Integer quantite = 0;
 
-    public Livre() {
+    public Long getId() {
+        return id;
     }
 
-    public Livre(String titre, String auteurs, String editeur, String collection, String resume, Date dateParution, String isbn, Categorie categorie) {
-        this.titre = titre;
-        this.auteurs = auteurs;
-        this.editeur = editeur;
-        this.collection = collection;
-        this.resume = resume;
-        this.dateParution = dateParution;
-        this.isbn = isbn;
-        this.categorie = categorie;
-    }
-
-    public Livre(String titre, String auteurs, String editeur, String collection, String resume, Date dateParution, String isbn) {
-        this.titre = titre;
-        this.auteurs = auteurs;
-        this.editeur = editeur;
-        this.collection = collection;
-        this.resume = resume;
-        this.dateParution = dateParution;
-        this.isbn = isbn;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitre() {
@@ -98,6 +95,14 @@ public class Livre implements Serializable {
 
     public void setTitre(String titre) {
         this.titre = titre;
+    }
+
+    public String getAuteurs() {
+        return auteurs;
+    }
+
+    public void setAuteurs(String auteurs) {
+        this.auteurs = auteurs;
     }
 
     public String getEditeur() {
@@ -140,19 +145,28 @@ public class Livre implements Serializable {
         this.isbn = isbn;
     }
 
-    public int getQuantite() {
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public Integer getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(int quantite) {
+    public void setQuantite(Integer quantite) {
         this.quantite = quantite;
     }
 
-    public Long getId() {
-        return id;
+    public Integer getEdition() {
+        return edition;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEdition(Integer edition) {
+        this.edition = edition;
     }
+
 }

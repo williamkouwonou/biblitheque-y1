@@ -1,0 +1,137 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Livres   <small> Nouveau Livre</small>
+        </h1>
+
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <i class="fa fa-info-circle"></i>  <strong>Veuillez remplir les champs</strong> 
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+
+    <flash-message duration="5000"  show-close="true" on-dismiss="myCallback(flash);" ></flash-message> 
+    <form class="form-horizontal" name="form" ng-submit="vm.register()" role="form">
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.categorie.$dirty && form.categories.$error.required }">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <label for="categorie" class="control-label">Categorire</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                <select id="categorie" class="form-control" ng-model="vm.categorie" ng-options="x.id as (x.designation) for x in vm.categories| orderBy:'designation'">
+
+                </select>
+                <span ng-show="form.categorie.$dirty && form.categorie.$error.required" class="help-block">La catégorie est obligatoire</span>
+                <span ng-show="vm.error.categorie" class="help-block">{{vm.error.categorie}}</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.titre.$dirty && form.titre.$error.required }">
+           <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="titre" class="control-label">Titre </label>
+           </div>
+             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="titre" id="titre" class="form-control" ng-model="vm.livre.titre" required />
+            <span ng-show="form.titre.$dirty && form.titre.$error.required" class="help-block">Le titre est obligatoire</span>
+            <span ng-show="vm.error.titre" class="help-block">{{vm.error.titre}}</span>
+        </div>
+             </div>
+        <div class="form-group" ng-class="{ 'has-error': form.isbn.$dirty && form.isbn.$error.required }">
+             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="isbn">ISBN </label>
+             </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="isbn" id="isbn" class="form-control" ng-model="vm.livre.isbn" required />
+            <span ng-show="form.isbn.$dirty && form.isbn.$error.required" class="help-block">L'isbn est obligatoire</span>
+            <span ng-show="vm.error.isbn" class="help-block">{{vm.error.isbn}}</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.auteurs.$dirty && form.auteurs.$error.required }">
+             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="auteurs">Auteurs :</label>
+             </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="auteurs" id="auteurs" class="form-control" ng-model="vm.livre.auteurs" required />
+            <span ng-show="form.auteurs.$dirty && form.auteurs.$error.required" class="help-block">Le auteurs est obligatoire</span>
+            <span ng-show="vm.error.auteurs" class="help-block">{{vm.error.auteurs}}</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error': form.dateParution.$dirty && form.dateParution.$error.required }">
+             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="dateParution">Date de Parution :</label>
+             </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input datetime="yyyy-MM-dd" type="date" name="dateParution" id="dateParution" class="form-control" ng-model="vm.livre.dateParution" required />
+            <span ng-show="form.dateParution.$dirty && form.dateParution.$error.required" class="help-block">La date de naissance est obligatoire</span>
+            <span ng-show="vm.error.dateParution" class="help-block">{{vm.error.dateParution}}</span>
+        </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.edition.$dirty && form.edition.$error.required }">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="edition">Edition :</label>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="edition" id="edition" class="form-control" ng-model="vm.livre.edition" required />
+            <span ng-show="form.edition.$dirty && form.edition.$error.required" class="help-block">Le numero de editionephone est obligatoire</span>
+            <span ng-show="vm.error.edition" class="help-block">{{vm.error.edition}}</span>
+        </div>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.editeur.$dirty && form.editeur.$error.required }">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="editeur">Editeur :</label>
+            </div>
+             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="editeur" id="editeur" class="form-control" ng-model="vm.livre.editeur" required />
+            <span ng-show="form.editeur.$dirty && form.editeur.$dirty && form.editeur.$error.required" class="help-block">L'editeur est obligatoire</span>
+            <span ng-show="vm.error.editeur" class="help-block">{{vm.error.editeur}}</span>
+        </div>
+        </div>
+
+        <div  class="form-group" ng-class="{ 'has-error': form.collection.$dirty && form.collection.$error.required }">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="collection">Collection</label>
+            </div>
+             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="collection" id="collection" class="form-control" ng-model="vm.livre.collection" required />
+            <span ng-show="form.collection.$dirty && form.collection.$error.required" class="help-block">La collection est obligatoire</span>
+            <span ng-show="vm.error.collection" class="alert-danger">{{vm.error.collection}}</span>
+        </div>
+        </div>
+        <div  class="form-group" ng-class="{ 'has-error': form.quantite.$dirty && form.quantite.$error.required }">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="quantite">Quantite</label>
+            </div>
+             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <input type="text" name="quantite" id="quantite" class="form-control" ng-model="vm.livre.quantite" required />
+            <span ng-show="form.quantite.$dirty && form.quantite.$error.required" class="help-block">La quantité est obligatoire</span>
+            <span ng-show="vm.error.quantite" class="alert-danger">{{vm.error.quantite}}</span>
+        </div>
+        </div>
+        <div  class="form-group" ng-class="{ 'has-error': form.resume.$dirty && form.resume.$error.required }">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <label for="resume">Resumé</label>
+            </div>
+             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+            <textarea type="text" name="resume" id="resume" class="form-control" ng-model="vm.livre.resume" required ></textarea>
+            <span ng-show="form.resume.$dirty && form.resume.$error.required" class="help-block">Le resumé est obligatoire</span>
+            <span ng-show="vm.error.resume" class="alert-danger">{{vm.error.resume}}</span>
+        </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Enregister</button>
+
+        </div>
+    </form>
+</div>

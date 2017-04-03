@@ -1,0 +1,86 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Livres <small>  Liste</small>
+        </h1>
+       
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <i class="fa fa-info-circle"></i>  <strong>Liste des livres</strong> 
+        </div>
+    </div>
+</div>
+
+<form>
+
+    <input type="text" ng-model="vm.mot" >
+    <button ng-click="vm.chercher()" > Chercher</button>
+</form>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-boa">
+            <div class="box-header">
+                <h3 class="box-title">Liste des livres</h3>
+
+
+            </div>
+            <!-- Default panel contents -->
+            <div class="table-responsive">
+                <table id="agenceListe"   class="table table-hover  table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Categorie</th>
+                            <th>Isbn</th>
+                            <th>Titre</th>
+                            <th>Auteurs</th>
+                            <th>Editeur</th>
+                            <th>Edition</th>
+                            <th>Resume</th>
+                            <th>Date Parution</th>
+                            
+                            <th>Collection</th>
+                            <th>Quantité</th>
+                            
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in vm.livres">
+                            <td><span ng-bind="u.categorie.designation"></span></td>
+                            <td><span ng-bind="u.isbn"></span></td>
+                            <td><span ng-bind="u.titre"></span></td>
+                            <td><span ng-bind="u.auteurs"></span></td>
+                            <td><span ng-bind="u.editeur"></span></td>
+                            <td><span ng-bind="u.edition"></span></td>
+                            <td><span ng-bind="u.resume"></span></td>
+                            <td><span ng-bind="u.dateParution"></span></td>
+                            <td><span ng-bind="u.collection"></span></td>
+                            <td><span ng-bind="u.quantite"></span></td>
+                            
+                            <td>
+                                <div class="btn-toolbar">
+                                    <button type="button" ng-click="vm.edit(u.id)" class="btn  btn-primary" title="modifier"><i class="fa fa-edit"></i></button>
+                                    <button type="button" ng-click="vm.remove(u.id)" class="btn  btn-danger" title="supprimer"><i class="fa fa-remove"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="container spacer">
+                <ul class="nav nav-pills">
+                    <li class="clickable" ng-repeat="p in vm.pages track by $index">
+                        <a ng-click="vm.goToPage($index)" > {{$index}}</a> 
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

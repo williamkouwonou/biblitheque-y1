@@ -5,10 +5,11 @@
  */
 package com.biblio;
 
-import com.biblio.entity.User;
-import com.biblio.repository.UserRepository;
+
 import com.biblio.security.SecurityUtils;
 import com.biblio.service.util.RandomUtil;
+import com.biblio.user.module.entity.User;
+import com.biblio.user.module.repository.UserRepository;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,9 @@
-package com.biblio.repository;
+package com.biblio.user.module.repository;
 
 
 
-import com.biblio.entity.User;
+
+import com.biblio.user.module.entity.User;
 import java.time.ZonedDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

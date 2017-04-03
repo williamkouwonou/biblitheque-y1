@@ -1,5 +1,7 @@
 package  com.biblio.service.util;
 
+import java.util.Calendar;
+import java.util.Date;
 import org.apache.commons.lang.RandomStringUtils;
 
 /**
@@ -49,5 +51,24 @@ public final class RandomUtil {
     */
     public static String generateResetKey() {
         return RandomStringUtils.randomNumeric(DEF_COUNT);
+    }
+    
+    public static String getRref() {
+
+        Date d = new Date();
+        Calendar ca = Calendar.getInstance();
+        String ref = ca.get(Calendar.YEAR) + "" + concat(2, ca.get(Calendar.MONTH)) + "" + concat(2, ca.get(Calendar.DAY_OF_MONTH)) + "" + concat(2, ca.get(Calendar.HOUR)) + "" + concat(2, ca.get(Calendar.MINUTE)) + "" + concat(2, ca.get(Calendar.SECOND)) + "" + concat(4, ca.get(Calendar.MILLISECOND));
+        return ref;
+    }
+public static String concat(Integer i, Integer number) {
+        if (i == null || number == null) {
+            return "";
+        }
+
+        String s = String.valueOf(number);
+        while (i > s.length()) {
+            s = "0" + s;
+        }
+        return s;
     }
 }

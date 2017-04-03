@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.biblio.auth.server;
+package com.biblio;
+
+
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;

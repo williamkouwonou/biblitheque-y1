@@ -18,6 +18,7 @@
         <module>biblio-auth-server</module>
         <module>biblio-resource-server</module>
         <module>admin-ui</module>
+        <module>user-module</module>
     </modules>
     <dependencies>
         
