@@ -89,9 +89,9 @@ zuul:
     user:
       path: /user/**
       url: http://localhost:9071/biblio/user
-    userlogout:
-      path: /globale/logout/**
-      url: http://localhost:9070/authserver/logout2
+    userpdf:
+      path: /pdf/exemple/**
+      url: http://localhost:9071/biblio/api/pdf/livre
     
 
 logging:
