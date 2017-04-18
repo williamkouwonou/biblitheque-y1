@@ -25,23 +25,6 @@ import java.util.Map;
 
 public class GenerateQRCode {
 
-    /**
-     * @param qrCodeText
-     * @param size
-     * @param fileType
-     * @return 
-     * @throws WriterException
-     * @throws IOException
-     */
-//    public static void main(String[] args) throws WriterException, IOException {
-//        String qrCodeText = "http://www.journaldev.com";
-//        String filePath = System.getProperty("user.home")+"/qrcode/J1D.png";
-//        int size = 125;
-//        String fileType = "png";
-//        //File qrFile = new File(filePath);
-//        createQRImage(qrFile, qrCodeText, size, fileType);
-//      
-//    }
 
    public BufferedImage createQRImage(String qrCodeText, int size) throws WriterException, IOException {
         // Create the ByteMatrix for the QR-Code that encodes the given String
