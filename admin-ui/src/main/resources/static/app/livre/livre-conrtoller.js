@@ -106,10 +106,12 @@ angular.module('app').controller('LivreController', ['$rootScope', '$location', 
         function initLivre() {
 
             vm.livre = angular.copy(LivreService.livre);
-
+            if(vm.livre.categorie){
+           vm.categorie =vm.livre.categorie.id;
+            }
             console.info(JSON.stringify(vm.livre));
             LivreService.livre = {titre: '', isbn: '', resume: '', auteurs: '', edition: '', collection: '',dateParustion:null,quantite:0};
-
+            
         }
         function edit(id) {
 
