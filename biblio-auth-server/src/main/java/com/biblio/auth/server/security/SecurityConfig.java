@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.session.SessionManagementFilter;
 
@@ -56,10 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         
        
-        
+        //http.sessionManagement().invalidSessionStrategy(invalidSessionStrategy)
         http.addFilterAfter(
                 new CustomFilter(),SessionManagementFilter.class)
                 .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()

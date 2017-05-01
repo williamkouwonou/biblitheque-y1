@@ -12,6 +12,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.core.Ordered;
@@ -25,8 +26,9 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleCorsFilter implements Filter {
+
     public SimpleCorsFilter() {
-      
+
     }
 
     @Override
@@ -40,7 +42,14 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization,Content-Type,x-xsrf-token");
-
+       
+        if (request.getRequestURL().toString().contains("logout")) {
+            System.out.println("AV "+ request.getRequestedSessionId());
+            System.out.println("MF "+ request.changeSessionId());
+            System.out.println("AP "+ request.getRequestedSessionId());
+            response.addCookie(new  Cookie("JSESSIONID", request.getRequestedSessionId()));
+            response.addCookie(new  Cookie("XSRF-TOKEN", request.getRequestedSessionId()));
+        }
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {

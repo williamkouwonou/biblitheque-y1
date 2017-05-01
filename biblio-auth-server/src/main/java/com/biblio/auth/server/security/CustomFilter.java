@@ -29,7 +29,7 @@ public class CustomFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) req;
          System.out.println("XXXXXXXXXXXXXXXXX  "+request.getRequestURL());
         HttpSession httpSession =request.getSession();
-        if(request.getRequestURL().toString().contains("token")){
+        if(request.getRequestURL().toString().contains("logout")){
             Cookie[] c = request.getCookies();
             
             if(c!=null){
