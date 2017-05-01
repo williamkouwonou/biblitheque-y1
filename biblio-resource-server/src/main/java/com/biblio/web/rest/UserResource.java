@@ -11,9 +11,11 @@ import com.biblio.security.util.ConstantRole;
 import com.biblio.service.MailService;
 import com.biblio.service.UserService;
 import com.biblio.service.dto.UserDTO;
+import com.biblio.service.util.RandomUtil;
 import com.biblio.user.module.entity.User;
 import com.biblio.user.module.repository.UserRepository;
 import com.biblio.user.module.utils.Constants;
+import com.biblio.web.rest.util.Utils;
 import com.biblio.web.rest.vm.KeyAndPasswordVM;
 import com.biblio.web.rest.vm.ManagedUserVM;
 import java.time.ZonedDateTime;
@@ -98,11 +100,16 @@ public class UserResource {
         }else{
              managedUserVM.getRoles().add(ConstantRole.USER_ROLE);
         }
-       
+        
+        managedUserVM.setPrenom(RandomUtil.generateAlphaNumerique(8));
         User u = userService.createUser(managedUserVM);
         modele.put(Constants.MESSAGE, "Enregistrement réussi");
-        
-        //mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
+//        try {
+//                    mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
+//        } catch (Exception e) {
+//            System.out.println("ex");
+//            return modele;
+//        }
         return modele;
     }
 

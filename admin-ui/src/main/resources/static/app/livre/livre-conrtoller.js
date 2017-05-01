@@ -1,4 +1,4 @@
-angular.module('app').controller('LivreController', ['$rootScope', '$location', 'Flash', 'LivreService', 'CategorieService', function ($rootScope, $location, Flash, LivreService, CategprieService) {
+angular.module('app').controller('LivreController', ['$rootScope', '$location', 'Flash', 'LivreService', 'CategorieService', '$scope',function ($rootScope, $location, Flash, LivreService, CategprieService,$scope) {
 
         var vm = this;
 
@@ -24,6 +24,19 @@ angular.module('app').controller('LivreController', ['$rootScope', '$location', 
                             vm.livre = null;
                            
                             vm.error = {};
+                            
+                           
+                           
+                            $scope.form.dateParution.$dirty =null;
+                            $scope.form.edition.$dirty =null;
+                            $scope.form.editeur.$dirty =null;
+                            $scope.form.titre.$dirty =null;
+                            $scope.form.isbn.$dirty =null;
+                            $scope.form.resume.$dirty =null;
+                            $scope.form.collection.$dirty =null;
+                            $scope.form.quantite.$dirty =null;
+                            $scope.form.auteurs.$dirty =null;
+                            
                             Flash.create('success', response.message, 4000, {class: 'custom-class', id: 'custom-id'}, true);
                         } else {
                             vm.error = response;

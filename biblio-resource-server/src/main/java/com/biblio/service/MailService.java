@@ -12,9 +12,12 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import javax.inject.Inject;
 import javax.mail.internet.MimeMessage;
 import java.util.Locale;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -47,7 +50,8 @@ public class MailService {
     private Environment env;
 
     @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
+    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) throws MessagingException {
+        System.out.println("5555555555555555555555");
         log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
                 isMultipart, isHtml, to, subject, content);
 
@@ -67,19 +71,23 @@ public class MailService {
             System.out.println("45");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.auth", "true");
             javaMailSender.getJavaMailProperties().setProperty("mail.smtp.starttls.enable", "true");
-           javaMailSender.getJavaMailProperties().setProperty("mail.debug", "true");
-           
+            javaMailSender.getJavaMailProperties().setProperty("mail.debug", "true");
+
             javaMailSender.send(mimeMessage);
 
             log.debug("Sent e-mail to User '{}'", to);
-        } catch (Exception e) {
+
+        } catch (AddressException e) {
+            log.warn("E-mail could not be sent to user '{}', exception is: {}", to, e.getMessage());
+
+        } catch (MessagingException | NumberFormatException | MailException e) {
 
             log.warn("E-mail could not be sent to user '{}', exception is: {}", to, e.getMessage());
         }
     }
 
     @Async
-    public void sendActivationEmail(User user, String baseUrl) {
+    public void sendActivationEmail(User user, String baseUrl) throws MessagingException {
         log.debug("Sending activation e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
@@ -91,7 +99,7 @@ public class MailService {
     }
 
     @Async
-    public void sendCreationEmail(User user, String baseUrl) {
+    public void sendCreationEmail(User user, String baseUrl) throws MessagingException {
         log.debug("Sending creation e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);
@@ -103,7 +111,7 @@ public class MailService {
     }
 
     @Async
-    public void sendPasswordResetMail(User user, String baseUrl) {
+    public void sendPasswordResetMail(User user, String baseUrl) throws MessagingException {
         log.debug("Sending password reset e-mail to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());
         Context context = new Context(locale);

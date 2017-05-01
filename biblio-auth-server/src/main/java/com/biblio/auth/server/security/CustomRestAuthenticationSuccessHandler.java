@@ -22,7 +22,7 @@ public class CustomRestAuthenticationSuccessHandler extends SimpleUrlAuthenticat
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws ServletException, IOException {
         if (authentication != null) {
-           
+            System.out.println("HHHHHHHHHHHHHHH");
             CustomSecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, authentication.getPrincipal());
         }
     }

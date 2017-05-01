@@ -75,7 +75,7 @@ public class Beans {
         roles.add(roleRepository.findByName(ConstantRole.USER_ROLE));
         u.setRoles(roles);
         User u1 = userRepository.findByLogin("admin");
-        if (u1 == null || !u.equals(u1)) {
+        if (u1 == null || !"admin".equals(u1.getLogin())) {
             userRepository.save(u);
         }
         return u;

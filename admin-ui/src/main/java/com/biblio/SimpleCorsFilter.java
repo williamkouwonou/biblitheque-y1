@@ -14,8 +14,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -24,8 +22,8 @@ import org.springframework.stereotype.Component;
 //@Component
 //@Order(0)
 public class SimpleCorsFilter implements Filter {
-
     public SimpleCorsFilter() {
+      
     }
 
     @Override

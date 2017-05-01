@@ -1,4 +1,4 @@
-angular.module('app').controller('UserController', ['$rootScope', '$location', 'Flash', 'UserService', 'FileUploader', function ($rootScope, $location, Flash, UserService, FileUploader) {
+angular.module('app').controller('UserController', ['$rootScope', '$location', 'Flash', 'UserService', 'FileUploader','$scope', function ($rootScope, $location, Flash, UserService, FileUploader,$scope) {
 
         var vm = this;
 
@@ -23,6 +23,13 @@ angular.module('app').controller('UserController', ['$rootScope', '$location', '
                             vm.user = null;
                             vm.user = {nom: '', prenom: '', dateNaissance: null, email: '', login: '', tel: ''};
                             vm.error = {};
+                            $scope.form.nom.$dirty=null;
+                            $scope.form.prenom.$dirty=null;
+                            $scope.form.email.$dirty=null;
+                            $scope.form.login.$dirty=null;
+                            $scope.form.tel.$dirty=null;
+                            $scope.form.dateNaissance.$dirty=null;
+                           
                             Flash.create('success', response.message, 4000, {class: 'custom-class', id: 'custom-id'}, true);
                         } else {
                             vm.error = response;

@@ -91,7 +91,7 @@ zuul:
       url: http://localhost:9071/biblio/user
     userpdf:
       path: /pdf/exemple/**
-      url: http://localhost:9071/biblio/api/pdf/livre
+      url: http://localhost:9071/biblio/api/pdf/livre,
     
 
 logging:

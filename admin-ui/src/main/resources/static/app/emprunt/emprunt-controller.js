@@ -1,4 +1,4 @@
-angular.module('app').controller('EmpruntController', ['$rootScope', '$location', 'Flash', 'EmpruntService', function ($rootScope, $location, Flash, EmpruntService) {
+angular.module('app').controller('EmpruntController', ['$rootScope', '$location', 'Flash', 'EmpruntService', '$scope',function ($rootScope, $location, Flash, EmpruntService,$scope) {
 
         var vm = this;
 
@@ -18,7 +18,8 @@ angular.module('app').controller('EmpruntController', ['$rootScope', '$location'
                     .then(function (response) {
                         if (!response.error) {
                             vm.dataLoading = false;
-                            
+                            $scope.form.login.$dirty =null;
+                            $scope.form.isbn.$dirty =null;
                             vm.isbn="";
                             vm.login="";
                             vm.error = {};

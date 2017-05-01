@@ -33,27 +33,27 @@
                 Administrateur
             </label>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.nom.$dirty && form.nom.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': vm.error.nom || form.nom.$dirty && form.nom.$error.required }">
             <label for="nom">Nom </label>
             <input type="text" name="nom" id="nom" class="form-control" ng-model="vm.user.nom" required />
             <span ng-show="form.nom.$dirty && form.nom.$error.required" class="help-block">Le nom est obligatoire</span>
             <span ng-show="vm.error.nom" class="help-block">{{vm.error.nom}}</span>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.prenom.$dirty && form.prenom.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': vm.error.prenom || form.prenom.$dirty && form.prenom.$error.required }">
             <label for="prenom">Prenoms :</label>
             <input type="text" name="prenom" id="prenom" class="form-control" ng-model="vm.user.prenom" required />
             <span ng-show="form.prenom.$dirty && form.prenom.$error.required" class="help-block">Le prenom est obligatoire</span>
             <span ng-show="vm.error.prenom" class="help-block">{{vm.error.prenom}}</span>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-error': form.dateNaissance.$dirty && form.dateNaissance.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': vm.error.dateNaissance || form.dateNaissance.$dirty && form.dateNaissance.$error.required }">
             <label for="dateNaissance">Date de naissance :</label>
             <input datetime="yyyy-MM-dd" type="date" name="dateNaissance" id="dateNaissance" class="form-control" ng-model="vm.user.dateNaissance" required />
             <span ng-show="form.dateNaissance.$dirty && form.dateNaissance.$error.required" class="help-block">La date de naissance est obligatoire</span>
             <span ng-show="vm.error.dateNaissance" class="help-block">{{vm.error.dateNaissance}}</span>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-error': form.tel.$dirty && form.tel.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': vm.error.tel || form.tel.$dirty && form.tel.$error.required }">
             <label for="tel">Tel :</label>
             <input type="text" name="tel" id="tel" class="form-control" ng-model="vm.user.tel" required />
             <span ng-show="form.tel.$dirty && form.tel.$error.required" class="help-block">Le numero de telephone est obligatoire</span>
@@ -61,17 +61,18 @@
         </div>
 
 
-        <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
+        <div class="form-group" ng-class="{ 'has-error': vm.error.email || form.email.$dirty && form.email.$invalid}">
             <label for="email">Email :</label>
             <input type="text" name="email" id="email" class="form-control" ng-model="vm.user.email" required />
             <span ng-show="form.email.$dirty && form.email.$dirty && form.email.$error.required" class="help-block">L'email est obligatoire</span>
+            <span ng-show="form.email.$error.email" class="help-block">Adresse email invalide</span>
             <span ng-show="vm.error.email" class="help-block">{{vm.error.email}}</span>
         </div>
 
-        <div ng-show="!vm.user.id" class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-            <label for="username">Login</label>
-            <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.login" required />
-            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Le login est obligatoire</span>
+        <div ng-show="!vm.user.id" class="form-group" ng-class="{ 'has-error': vm.error.login ||form.login.$dirty && form.login.$error.required }">
+            <label for="login">Login</label>
+            <input type="text" name="login" id="login" class="form-control" ng-model="vm.user.login" required />
+            <span ng-show="form.login.$dirty && form.login.$error.required" class="help-block">Le login est obligatoire</span>
             <span ng-show="vm.error.login" class="alert-danger">{{vm.error.login}}</span>
         </div>
 

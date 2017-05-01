@@ -1,4 +1,4 @@
-angular.module('app').controller('CategorieController', ['Flash', 'CategorieService', function (Flash, CategorieService) {
+angular.module('app').controller('CategorieController', ['Flash', 'CategorieService','$scope',  function (Flash, CategorieService,$scope) {
 
         var vm = this;
 
@@ -24,6 +24,8 @@ angular.module('app').controller('CategorieController', ['Flash', 'CategorieServ
                             vm.categorie = null;
                             vm.categorie = {designation: '', description: ''};
                             vm.error = {};
+                          $scope.form.description.$dirty=null;
+                          $scope.form.designation.$dirty=null;
                             Flash.create('success', response.message, 4000, {class: 'custom-class', id: 'custom-id'}, true);
                             chercher();
                         } else {
@@ -40,6 +42,7 @@ angular.module('app').controller('CategorieController', ['Flash', 'CategorieServ
                 update();
             } else {
                 Create();
+                
             }
 
         }
