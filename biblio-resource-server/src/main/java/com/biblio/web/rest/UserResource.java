@@ -101,15 +101,15 @@ public class UserResource {
              managedUserVM.getRoles().add(ConstantRole.USER_ROLE);
         }
         
-        managedUserVM.setPrenom(RandomUtil.generateAlphaNumerique(8));
+        managedUserVM.setPassword(RandomUtil.generateAlphaNumerique(8));
         User u = userService.createUser(managedUserVM);
         modele.put(Constants.MESSAGE, "Enregistrement réussi");
-//        try {
-//                    mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
-//        } catch (Exception e) {
-//            System.out.println("ex");
-//            return modele;
-//        }
+        try {
+                    mailService.sendEmail(u.getEmail(), "Mot de passe", " Les parametre de compte\n Username : "+u.getLogin()+" \n password "+managedUserVM.getPassword(), true, true);
+        } catch (Exception e) {
+            System.out.println("ex");
+            return modele;
+        }
         return modele;
     }
 
