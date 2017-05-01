@@ -105,9 +105,7 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
 
                         };
                          
-                        $http(req2).finally(function () {
-                           
-                        });
+                    
                         $http(req).finally(function () {
                             $rootScope.authenticated = false;
                             self.nom = '';
