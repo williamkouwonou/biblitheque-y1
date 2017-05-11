@@ -55,7 +55,7 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
 
 })
         .controller('navigation',
-                function ($rootScope, $http, $location, $route, $cookies, $cookieStore) {
+                function ($window,$rootScope, $http, $location, $route, $cookies, $cookieStore) {
 
                     var self = this;
   
@@ -100,10 +100,11 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
                         };
                         var req2 = {
                             method: 'GET',
-                            url: "globale/logout",
+                            url: "http://localhost:9070/authserver/logout",
                             xhrFields: {withCredentials: true}
 
                         };
+                       
                          
                     
                         $http(req).finally(function () {
@@ -111,7 +112,11 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
                             self.nom = '';
 
                            
-                            $location.path("/");
+                           // $location.path("/");
+                        });
+                        $http(req2).finally(function () {
+                           $window.location.href="http://localhost:9070/authserver/logout?redirect_uri=http://"+$location.host()+":"+$location.port()+"/ui/";
+                           // $location.path("http://localhost:9070/authserver/logout");
                         });
                     };
 

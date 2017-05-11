@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.session.SessionManagementFilter;
 
 /**
@@ -25,6 +26,8 @@ import org.springframework.security.web.session.SessionManagementFilter;
 @Order(-20)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private CustomLogoutSuccessHandler customLogoutSuccessHandler;
     @Autowired
     private SimpleCorsFilter simpleCorsFilter;
     @Autowired
@@ -55,23 +58,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        
-       
+
         //http.sessionManagement().invalidSessionStrategy(invalidSessionStrategy)
         http.addFilterAfter(
-                new CustomFilter(),SessionManagementFilter.class)
+                new CustomFilter(), SessionManagementFilter.class)
                 .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .antMatchers("/api/register/**").hasRole("ADMIN")
-                .antMatchers("/logout2/**").permitAll()
+                .antMatchers("/logout/**").permitAll()
                 .and().formLogin()
                 .loginPage("/login").permitAll()
                 .and()
-                .logout().logoutUrl("/logout2").invalidateHttpSession(true).clearAuthentication(true)
-                .permitAll();
+                .logout()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                //.logoutSuccessHandler(customLogoutSuccessHandler)
+                .deleteCookies("JSESSIONID")
+                ;
         // @formatter:on
     }
 }

@@ -37,6 +37,7 @@ public class SimpleCorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
 
         System.out.println("FFFFFFFFFF  " + request.getRequestURL());
+        System.out.println("FFFFFFFFFF0  " + request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
@@ -44,11 +45,12 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization,Content-Type,x-xsrf-token");
        
         if (request.getRequestURL().toString().contains("logout")) {
+         ///   response.sendRedirect("http://localhost:9070/authserver/logout");
+           
             System.out.println("AV "+ request.getRequestedSessionId());
             System.out.println("MF "+ request.changeSessionId());
             System.out.println("AP "+ request.getRequestedSessionId());
-            response.addCookie(new  Cookie("JSESSIONID", request.getRequestedSessionId()));
-            response.addCookie(new  Cookie("XSRF-TOKEN", request.getRequestedSessionId()));
+            
         }
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);

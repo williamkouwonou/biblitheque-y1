@@ -29,21 +29,7 @@ public class CustomFilter extends GenericFilterBean {
         HttpServletRequest request = (HttpServletRequest) req;
          System.out.println("XXXXXXXXXXXXXXXXX  "+request.getRequestURL());
         HttpSession httpSession =request.getSession();
-        if(request.getRequestURL().toString().contains("logout")){
-            Cookie[] c = request.getCookies();
-            
-            if(c!=null){
-                for(Cookie k: c){
-                 System.out.println("k.getValue() : "+k.getValue());
-                   
-                if(k.getName().equalsIgnoreCase("JSESSIONID")){
-                    System.out.println("k.getValue() : "+k.getValue());
-                    System.out.println("httpSession.getId() : "+httpSession.getId());
-                    k.setValue(httpSession.getId());
-                }
-            }
-            }
-        }
+        
         chain.doFilter(request, response);
     }
 }

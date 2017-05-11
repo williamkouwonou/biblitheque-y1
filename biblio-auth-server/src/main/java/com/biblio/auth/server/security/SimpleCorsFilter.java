@@ -33,13 +33,33 @@ public class SimpleCorsFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
-        
+        System.out.println("req " + request.getRequestURI());
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-         response.setHeader("Access-Control-Allow-Credentials","true");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization");
-    response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, authorization,x-xsrf-token");
+        response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, authorization,x-xsrf-token");
+        System.out.println("DDD " + request.getRequestedSessionId());
+
+        if (request.getRequestURI().contains("logout")) {
+            System.out.println("MFLOGOUT " + request.getRequestedSessionId());
+            if (request.getRequestURL().toString().contains("logout")) {
+                String ruri =request.getParameter("redirect_uri");
+                
+                if(ruri!=null && !ruri.isEmpty()){
+                    response.sendRedirect(ruri);
+                }
+                
+           //response.sendRedirect("http://localhost:9070/authserver/logout");
+           
+//            System.out.println("AV "+ request.getRequestedSessionId());
+//            System.out.println("MF "+ request.changeSessionId());
+//            System.out.println("AP "+ request.getRequestedSessionId());
+//            
+        }
+
+        }
 
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);

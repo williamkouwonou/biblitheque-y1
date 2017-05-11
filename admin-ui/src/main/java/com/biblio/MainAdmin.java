@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-
 
 @SpringBootApplication
 @EnableZuulProxy
@@ -25,17 +25,23 @@ public class MainAdmin extends WebSecurityConfigurerAdapter {
     public static void main(String[] args) {
         SpringApplication.run(MainAdmin.class, args);
     }
+
     @Override
-	public void configure(HttpSecurity http) throws Exception {
-		http
-			.logout().and()
-			.authorizeRequests()
-				.antMatchers("/index.html", "/home.html", "/", "/login","/app/**"
-                                        ,"/font-awesome/**","/appjs/**","/layout/**").permitAll()
-				.anyRequest().authenticated()
-				.and()
-			.csrf()
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-	}
-        
+    public void configure(HttpSecurity http) throws Exception {
+        http//sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+
+                .authorizeRequests()
+                .antMatchers("/index.html", "/home.html", "/", "/login", "/app/**", "/font-awesome/**", "/appjs/**", "/layout/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and().logout()
+                //.logoutUrl("http://localhost:9070/authserver/logout");
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                //.logoutSuccessHandler(customLogoutSuccessHandler)
+                .deleteCookies("JSESSIONID");
+    }
+
 }
