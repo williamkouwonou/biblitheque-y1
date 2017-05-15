@@ -42,6 +42,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+           
             clients.inMemory()
                     .withClient("acme")
                     .secret("acmesecret")
@@ -59,7 +60,12 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         @Override
         public void configure(AuthorizationServerSecurityConfigurer oauthServer)
                 throws Exception {
+        
             oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
                     "isAuthenticated()");
+            //oauthServer.allowFormAuthenticationForClients();
+            
+            
         }
+        
 }

@@ -6,6 +6,9 @@
 package com.biblio.auth.server.security;
 
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Scanner;
+import java.util.stream.Collectors;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -41,23 +44,40 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization");
         response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, authorization,x-xsrf-token");
         System.out.println("DDD " + request.getRequestedSessionId());
+        System.out.println("Content-type " + request.getHeader("Content-Type"));
+        System.out.println("Exemple " + request.getHeader("exemple"));
+        
+//        Enumeration<String> e= request.getHeaderNames();
+//         Enumeration<String> e2=   request.getAttributeNames();
+//        while(e.hasMoreElements()){
+//            System.out.println("A2"+e.nextElement());
+//        }
+//        while(e2.hasMoreElements()){
+//            System.out.println("A1"+e2.nextElement());
+//        }
+//        
+//        
+//        if ("POST".equalsIgnoreCase(request.getMethod())) {
+//            Scanner s = new Scanner(request.getInputStream(), "UTF-8").useDelimiter("\\A");
+//           String ss=s.hasNext() ? s.next() : "";
+//           System.out.println("test "+ss);
+//        }
 
         if (request.getRequestURI().contains("logout")) {
             System.out.println("MFLOGOUT " + request.getRequestedSessionId());
             if (request.getRequestURL().toString().contains("logout")) {
-                String ruri =request.getParameter("redirect_uri");
-                
-                if(ruri!=null && !ruri.isEmpty()){
+                String ruri = request.getParameter("redirect_uri");
+
+                if (ruri != null && !ruri.isEmpty()) {
                     response.sendRedirect(ruri);
                 }
-                
-           //response.sendRedirect("http://localhost:9070/authserver/logout");
-           
+
+                //response.sendRedirect("http://localhost:9070/authserver/logout");
 //            System.out.println("AV "+ request.getRequestedSessionId());
 //            System.out.println("MF "+ request.changeSessionId());
 //            System.out.println("AP "+ request.getRequestedSessionId());
 //            
-        }
+            }
 
         }
 

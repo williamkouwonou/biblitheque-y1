@@ -4,6 +4,7 @@ package com.biblio.user.module.repository;
 
 
 import com.biblio.user.module.entity.User;
+import com.biblio.user.module.utils.Profile;
 import java.time.ZonedDateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Page<User> findByMoCle(@Param("mot")String mot,Pageable pageable);
     @Query("SELECT u FROM User u WHERE u.nom LIKE :mot OR u.prenom like :mot OR u.tel LIKE :mot OR u.email LIKE :mot")
     List<User> findByMoCle(@Param("mot")String mot);
+        List<User> findByProfile(Profile p);
 
     @Override
     void delete(User t);
