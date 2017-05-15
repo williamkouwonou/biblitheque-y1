@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).config(function ($routeProvider, $httpProvider) {
+angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies', 'file-uploader']).config(function ($routeProvider, $httpProvider) {
 
 
     $routeProvider
@@ -55,10 +55,10 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
 
 })
         .controller('navigation',
-                function ($window,$rootScope, $http, $location, $route, $cookies, $cookieStore) {
+                function ($window, $rootScope, $http, $location, $route, $cookies, $cookieStore) {
 
                     var self = this;
-  
+
                     self.tab = function (route) {
                         return $route.current && route === $route.current.controller;
                     };
@@ -78,9 +78,9 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
                     $http.get('userinfo').then(function (response) {
 
                         if (response.data.name) {
-                            $rootScope.userinfo=response.data;
-                            
-                            $rootScope.userinfo.dateNaissance=new Date($rootScope.userinfo.dateNaissance);
+                            $rootScope.userinfo = response.data;
+
+                            $rootScope.userinfo.dateNaissance = new Date($rootScope.userinfo.dateNaissance);
                             $rootScope.name = response.data.name;
 
                         }
@@ -89,7 +89,7 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
                     self.credentials = {};
 
                     self.voirProfile = function () {
-                         $location.path("/profile");
+                        $location.path("/profile");
                     };
                     self.logout = function () {
                         var req = {
@@ -100,23 +100,18 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies','file-uploader']).confi
                         };
                         var req2 = {
                             method: 'GET',
-                            url: "http://localhost:9070/authserver/logout",
+                            url: "auth/logout",
                             xhrFields: {withCredentials: true}
 
                         };
-                       
-                         
-                    
+
                         $http(req).finally(function () {
                             $rootScope.authenticated = false;
                             self.nom = '';
 
-                           
-                           // $location.path("/");
                         });
-                        $http(req2).finally(function () {
-                           $window.location.href="http://localhost:9070/authserver/logout?redirect_uri=http://"+$location.host()+":"+$location.port()+"/ui/";
-                           // $location.path("http://localhost:9070/authserver/logout");
+                        $http(req2).then(function (response) {
+                            $window.location.href = response.data.url + "?redirect_uri=http://"+$location.host() + ":" + $location.port() + "/ui/";
                         });
                     };
 

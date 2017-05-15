@@ -44,14 +44,7 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with, authorization,Content-Type,x-xsrf-token");
        
-        if (request.getRequestURL().toString().contains("logout")) {
-         ///   response.sendRedirect("http://localhost:9070/authserver/logout");
-           
-            System.out.println("AV "+ request.getRequestedSessionId());
-            System.out.println("MF "+ request.changeSessionId());
-            System.out.println("AP "+ request.getRequestedSessionId());
-            
-        }
+     
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
