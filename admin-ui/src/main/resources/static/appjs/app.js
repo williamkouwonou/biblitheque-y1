@@ -111,7 +111,7 @@ angular.module('app', ['ngRoute', 'ngFlash', 'ngCookies', 'file-uploader']).conf
 
                         });
                         $http(req2).then(function (response) {
-                            $window.location.href = response.data.url + "?redirect_uri=http://"+$location.host() + ":" + $location.port() + "/ui/";
+                            $window.location.href = "http://"+$location.host() + ":"+response.data.url + "?redirect_uri=http://"+$location.host() + ":" + $location.port() + "/ui/";
                         });
                     };
 

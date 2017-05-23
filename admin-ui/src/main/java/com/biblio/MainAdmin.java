@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableZuulProxy
 @EnableOAuth2Sso
 @RestController
-public class MainAdmin extends WebSecurityConfigurerAdapter {
+public class MainAdmin   extends WebSecurityConfigurerAdapter  {
 
     @Autowired
     private Environment env;
@@ -38,20 +40,19 @@ public class MainAdmin extends WebSecurityConfigurerAdapter {
         SpringApplication.run(MainAdmin.class, args);
     }
 
-        @RequestMapping(value = "/auth/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-
+  
+    @RequestMapping(value = "/auth/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Object logoutUrl() {
         Map<String, Object> modele = new HashMap<>();
-        modele.put("url", env.getProperty("server.oauth2.logout"));
+        modele.put("url", env.getProperty("serverlogout"));
         return modele;
     }
-
-    @Override
+@Override
     public void configure(HttpSecurity http) throws Exception {
         http//sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
                 .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/","/auth/logout", "/login", "/app/**", "/font-awesome/**", "/appjs/**", "/layout/**").permitAll()
+                .antMatchers("/index.html", "/home.html", "/","/auth/logout",  "/app/**", "/font-awesome/**", "/appjs/**", "/layout/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
@@ -63,5 +64,4 @@ public class MainAdmin extends WebSecurityConfigurerAdapter {
                 //.logoutSuccessHandler(customLogoutSuccessHandler)
                 .deleteCookies("JSESSIONID");
     }
-
 }

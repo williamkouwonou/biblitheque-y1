@@ -16,6 +16,8 @@ import java.util.Map;
 import javax.inject.Inject;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @SpringBootApplication
 @RestController
-public class BiblithequeMain {
+public class BiblithequeMain extends SpringBootServletInitializer{
 
     @Inject
     UserRepository userRepository;
@@ -37,7 +39,10 @@ public class BiblithequeMain {
 
         SpringApplication.run(BiblithequeMain.class, args);
     }
-
+ @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder bulder) {
+        return bulder.sources(BiblithequeMain.class);
+    }
     @RequestMapping(value = "/hello")
     public Object hello() {
         Map<String, Object> modele = new HashMap<>();
