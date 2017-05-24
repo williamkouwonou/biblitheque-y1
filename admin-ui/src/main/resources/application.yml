@@ -4,7 +4,7 @@ spring:
   aop:
     proxy-target-class: true
 
-serverlogout: 8092/authserver/logout
+serverlogout: http://192.168.0.30:8092/authserver/logout
 security:
   user:
     password: none
@@ -25,73 +25,73 @@ zuul:
   routes:
     resources:
       path: /resources/**
-      url: http://192.168.0.30:8092/biblio/hello
+      url: http://localhost:8092/biblio/hello
     userregiser :
       path: /resource/user/create/**
-      url: http://192.168.0.30:8092/biblio/api/user/register
+      url: http://localhost:8092/biblio/api/user/register
     userupdate :
       path: /resource/user/update/**
-      url: http://192.168.0.30:8092/biblio/api/user/account
+      url: http://localhost:8092/biblio/api/user/account
     userlist :
       path: /resource/user/listpage/**
-      url: http://192.168.0.30:8092/biblio/api/user/listpage
+      url: http://localhost:8092/biblio/api/user/listpage
 #      CATEGORIE RESOURCES
     categoriecreate:
       path: /resource/categorie/create/**
-      url: http://192.168.0.30:8092/biblio/api/categories/create
+      url: http://localhost:8092/biblio/api/categories/create
     categorieupdate:
       path: /resource/categorie/update/**
-      url: http://192.168.0.30:8092/biblio/api/categories/update
+      url: http://localhost:8092/biblio/api/categories/update
     categoriesearchepage:
       path: /resource/categorie/searchepage/**
-      url: http://192.168.0.30:8092/biblio/api/categories/searchepage
+      url: http://localhost:8092/biblio/api/categories/searchepage
     categoriesearche:
       path: /resource/categorie/searche/**
-      url: http://192.168.0.30:8092/biblio/api/categories/searche
+      url: http://localhost:8092/biblio/api/categories/searche
     categorielist:
       path: /resource/categorie/list/**
-      url: http://192.168.0.30:8092/biblio/api/categories/list
+      url: http://localhost:8092/biblio/api/categories/list
       #      LIVRE RESOURCES
     livrecreate:
       path: /resource/livre/create/**
-      url: http://192.168.0.30:8092/biblio/api/livres/create
+      url: http://localhost:8092/biblio/api/livres/create
     livreupdate:
       path: /resource/livre/update/**
-      url: http://192.168.0.30:8092/biblio/api/livres/update
+      url: http://localhost:8092/biblio/api/livres/update
     livresearchepage:
       path: /resource/livre/searchepage/**
-      url: http://192.168.0.30:8092/biblio/api/livres/searchepage
+      url: http://localhost:8092/biblio/api/livres/searchepage
     livresearche:
       path: /resource/livre/searche/**
-      url: http://192.168.0.30:8092/biblio/api/livres/searche
+      url: http://localhost:8092/biblio/api/livres/searche
       
 #      EMPRUNT  RESOURCES
     empruntscreate:
       path: /resource/emprunt/create/**
-      url: http://192.168.0.30:8092/biblio/api/emprunts/create
+      url: http://localhost:8092/biblio/api/emprunts/create
     empruntscreatemobile:
       path: /resource/emprunt/createmobile/**
-      url: http://192.168.0.30:8092/biblio/api/emprunts/createmobile
+      url: http://localhost:8092/biblio/api/emprunts/createmobile
     empruntsupdate:
       path: /resource/emprunt/update/**
-      url: http://192.168.0.30:8092/biblio/api/emprunts/update
+      url: http://localhost:8092/biblio/api/emprunts/update
     empruntssearchepage:
       path: /resource/emprunt/searchepage/**
-      url: http://192.168.0.30:8092/biblio/api/emprunts/searchepage
+      url: http://localhost:8092/biblio/api/emprunts/searchepage
     empruntssearche:
       path: /resource/emprunt/searche/**
-      url: http://192.168.0.30:8092/biblio/api/emprunts/searche
+      url: http://localhost:8092/biblio/api/emprunts/searche
       
 #      User info
     userinfo:
       path: /userinfo/**
-      url: http://192.168.0.30:8092/biblio/user/info
+      url: http://localhost:8092/biblio/user/info
     user:
       path: /user/**
-      url: http://192.168.0.30:8092/biblio/user
+      url: http://localhost:8092/biblio/user
     userpdf:
       path: /pdf/exemple/**
-      url: http://192.168.0.30:8092/biblio/api/pdf/livre,
+      url: http://localhost:8092/biblio/api/pdf/livre,
     
 
 logging:
