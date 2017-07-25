@@ -1,7 +1,6 @@
 package com.biblio.auth.server;
 
 
-import java.text.ParseException;
 import java.util.Date;
 import org.hibernate.validator.constraints.Email;
 

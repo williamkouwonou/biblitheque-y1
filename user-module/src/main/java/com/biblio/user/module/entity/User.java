@@ -9,7 +9,6 @@ import com.biblio.user.module.utils.Constants;
 import com.biblio.user.module.utils.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;

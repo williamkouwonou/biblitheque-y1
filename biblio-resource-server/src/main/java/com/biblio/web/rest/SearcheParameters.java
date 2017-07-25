@@ -15,12 +15,12 @@ import javax.persistence.Temporal;
 public class SearcheParameters {
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateDebut;
+    private Date dateDebut; //date des emprunts >= cette date (optionnel)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateFin;
-    private Integer size;
-    private Integer page;
-    private String moCle;
+    private Date dateFin;//date des emprunts <= cette date (optionnel)
+    private Integer size; // le nombre d'element de la liste (optionnel)
+    private Integer page; // la page (optionnel)
+    private String moCle; // le mot clé recherché (optionnel)
 
     public Date getDateDebut() {
         return dateDebut;
